@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:fitness_app/config/errors/app_exception.dart';
+import 'package:fitness_app/core/constants/errors_constants.dart';
 import 'api_exception.dart';
 import 'local_exception.dart';
 
@@ -50,7 +51,7 @@ AppException _handleDioError(DioException error) {
 }
 
 AppException _handleBadResponse(DioException error) {
-  return ApiException.fromJson(
+  return ApiException.fromResponse(
     json: error.response?.data,
     statusCode: error.response?.statusCode,
   );

@@ -1,4 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:fitness_app/config/network/auth_interceptor.dart';
+import 'package:fitness_app/config/network/pretty_dio_logger_interceptor.dart';
+import 'package:fitness_app/core/constants/api_constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 

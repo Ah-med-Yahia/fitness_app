@@ -2,6 +2,7 @@ import 'package:fitness_app/config/base_response/base_response.dart';
 import 'package:fitness_app/config/cache_services/cache_storage_contract.dart';
 import 'package:fitness_app/config/cache_services/serializer/string_serializer.dart';
 import 'package:fitness_app/config/services/tokens/token_service_storage_contract.dart';
+import 'package:fitness_app/core/constants/cache_constants.dart';
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: TokenServiceStorageContract)

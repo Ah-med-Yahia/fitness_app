@@ -1,21 +1,30 @@
 import 'package:dio/dio.dart';
+import 'package:fitness_app/config/base_response/base_response.dart';
+import 'package:fitness_app/config/services/tokens/token_service_storage_contract.dart';
+import 'package:fitness_app/core/constants/api_constants.dart';
+import 'package:fitness_app/core/constants/cache_constants.dart';
+import 'package:fitness_app/core/constants/errors_constants.dart';
+import 'package:fitness_app/core/extensions/extensions.dart';
+import 'package:fitness_app/core/routing/app_router.dart';
+import 'package:fitness_app/core/routing/app_routes_constant.dart';
 import 'package:injectable/injectable.dart';
+
+import '../services/app_logger.dart' show appLogger;
 
 @injectable
 class AuthInterceptor extends Interceptor {
   final TokenServiceStorageContract _tokenStorage;
-  final TokensManagerContract _tokensManager;
 
-  AuthInterceptor(this._tokenStorage, this._tokensManager);
+  AuthInterceptor(this._tokenStorage);
 
   @override
   Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final accessToken = await _tokenStorage.getAccessToken();
+    final token = await _tokenStorage.getToken();
 
-    accessToken.when(
+    token.when(
       success: (token) {
         if (!token.isNullOrEmpty()) {
           options.headers[ApiConstants.authorization] =
@@ -23,7 +32,7 @@ class AuthInterceptor extends Interceptor {
         }
       },
       failure: (error) {
-        appLogger.e(CacheConstants.accessTokenReadFailed);
+        appLogger.e(CacheConstants.tokenReadFailed);
       },
     );
 
@@ -36,52 +45,16 @@ class AuthInterceptor extends Interceptor {
     ErrorInterceptorHandler handler,
   ) async {
     if (err.response?.statusCode == 401) {
-      final refreshedTokenResponse = await _tokenStorage.getRefreshToken();
-      refreshedTokenResponse.when(
-        success: (refreshToken) async {
-          if (refreshToken.isNullOrEmpty()) {
-            return _clearAndNavigateToLogin(err, handler);
-          }
-          final refreshTokenResponse =
-              await safeApiCall<RefreshTokenResponseModel>(() async {
-                return await _tokensManager.refreshToken(refreshToken!);
-              });
-          refreshTokenResponse.when(
-            success: (data) async {
-              _tokenStorage.saveAccessToken(token: data.access);
-              _tokenStorage.saveRefreshToken(token: data.refresh);
-              err.requestOptions.headers[ApiConstants.authorization] =
-                  '${ApiConstants.bearer} ${data.access}';
-              final cloneRequest = await _tokensManager.fetchRequestOptions(
-                err.requestOptions,
-              );
-              return handler.resolve(cloneRequest);
-            },
-            failure: (error) {
-              return _clearAndNavigateToLogin(err, handler);
-            },
-          );
-        },
-        failure: (error) {
-          return CacheException(CacheConstants.refreshTokenReadFailed);
-        },
+      _tokenStorage.clearToken();
+      AppRouter.router.go(AppRoutesConstants.signInRoute);
+      return handler.reject(
+        DioException(
+          requestOptions: err.requestOptions,
+          error: ErrorsConstant.sessionExpiredError,
+          type: DioExceptionType.cancel,
+        ),
       );
     }
     handler.next(err);
-  }
-
-  void _clearAndNavigateToLogin(
-    DioException err,
-    ErrorInterceptorHandler handler,
-  ) {
-    _tokenStorage.clearTokens();
-    AppRouter.router.go(AppRoutesConstants.loginRoute);
-    return handler.reject(
-      DioException(
-        requestOptions: err.requestOptions,
-        error: ErrorsConstant.sessionExpiredError,
-        type: DioExceptionType.cancel,
-      ),
-    );
   }
 }
