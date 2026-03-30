@@ -54,4 +54,18 @@ flutter:
   uses-material-design: true
 
 
+  assets:
+  - assets/images/
+  - assets/icons/
+  - assets/translations/
+
+flutter_gen:
+  output: lib/core/gen/
+  integrations:
+    lottie: true
+    flutter_svg: true
+  assets:
+    enabled: true
+    outputs:
+      package_parameter_enabled: false
 

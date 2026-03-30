@@ -9,29 +9,29 @@ String userModelToJson(UserModel data) => json.encode(data.toJson());
 
 @JsonSerializable()
 class UserModel {
-    @JsonKey(name: "firstName")
+    @JsonKey(name: 'firstName')
     final String firstName;
-    @JsonKey(name: "lastName")
+    @JsonKey(name: 'lastName')
     final String lastName;
-    @JsonKey(name: "email")
+    @JsonKey(name: 'email')
     final String email;
-    @JsonKey(name: "gender")
+    @JsonKey(name: 'gender')
     final String gender;
-    @JsonKey(name: "age")
+    @JsonKey(name: 'age')
     final int age;
-    @JsonKey(name: "weight")
+    @JsonKey(name: 'weight')
     final int weight;
-    @JsonKey(name: "height")
+    @JsonKey(name: 'height')
     final int height;
-    @JsonKey(name: "activityLevel")
+    @JsonKey(name: 'activityLevel')
     final String activityLevel;
-    @JsonKey(name: "goal")
+    @JsonKey(name: 'goal')
     final String goal;
-    @JsonKey(name: "photo")
+    @JsonKey(name: 'photo')
     final String photo;
-    @JsonKey(name: "_id")
+    @JsonKey(name: '_id')
     final String id;
-    @JsonKey(name: "createdAt")
+    @JsonKey(name: 'createdAt')
     final DateTime createdAt;
 
     UserModel({
