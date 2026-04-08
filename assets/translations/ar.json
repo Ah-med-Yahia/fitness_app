@@ -1,0 +1,17 @@
+{
+  "app": {
+    "title": "Fitness App"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "register": "تسجيل",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "first_name": "الاسم الأول",
+    "last_name": "الاسم الأخير"
+  },
+  "errors": {
+    "required": "هذه الخانة مطلوبة",
+    "invalid_email": "يرجى إدخال بريد إلكتروني صحيح"
+  }
+}

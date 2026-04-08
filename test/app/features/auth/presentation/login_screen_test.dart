@@ -4,8 +4,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:fitness_app/app/features/auth/presentation/view_model/login_cubit.dart';
-import 'package:fitness_app/app/features/auth/presentation/states/login_state.dart';
+import 'package:fitness_app/app/features/auth/presentation/view_model/login/login_cubit.dart';
+import 'package:fitness_app/app/features/auth/presentation/view_model/login/login_state.dart';
 import 'package:fitness_app/app/features/auth/presentation/screens/login_screen.dart';
 
 import 'login_screen_test.mocks.dart';
@@ -17,11 +17,10 @@ void main() {
   setUp(() {
     mockCubit = MockLoginCubit();
     when(mockCubit.state).thenReturn(const LoginState.initial());
-    when(mockCubit.stream).thenAnswer((_) => const Stream.empty());
+    when(mockCubit.stream).thenAnswer((_) => const Stream<LoginState>.empty());
   });
 
   Widget buildSubject() => MaterialApp(
-    // ✅ Required so EasyLoading doesn't throw in tests
     builder: EasyLoading.init(),
     home: BlocProvider<LoginCubit>.value(
       value: mockCubit,

@@ -13,4 +13,7 @@ class AppColors {
   static const Color authGlassCard = Color(0x1A242424);
   static const Color lightDivider = Color(0xFFD3D3D3);
   static const Color accentOrange = Color(0xFFFF6A00);
+  static const Color radioUnselected = Color(0xFFD9D9D9);
+  static const Color glassOption = Color(0x33D3D3D3);
+  static const Color disabledButton = Color(0xFFD3D3D3);
 }

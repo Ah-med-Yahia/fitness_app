@@ -4,8 +4,9 @@ import 'package:fitness_app/app/core/gen/assets.gen.dart';
 import 'package:fitness_app/app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class LoginBackgroundLayers extends StatelessWidget {
-  const LoginBackgroundLayers({super.key});
+class AuthBackground extends StatelessWidget {
+  const AuthBackground({super.key, required this.child});
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,7 @@ class LoginBackgroundLayers extends StatelessWidget {
             child: Container(color: AppColors.authOverlay),
           ),
         ),
+        child,
       ],
     );
   }

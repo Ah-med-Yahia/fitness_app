@@ -12,6 +12,7 @@ class AuthTextConstants {
   static const String or = 'Or';
   static const String noAccount = "Don't Have An Account Yet ? ";
   static const String register = 'Register';
+  static const String next = 'Next';
 }
 
 class AuthUiConstants {

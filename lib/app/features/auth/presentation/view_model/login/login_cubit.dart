@@ -2,8 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:fitness_app/app/config/errors/app_exception.dart';
 import 'package:fitness_app/app/config/services/tokens/token_service_storage_contract.dart';
-import '../../domain/use_cases/login_use_case.dart';
-import '../states/login_state.dart';
+import 'package:fitness_app/app/features/auth/domain/use_cases/login_use_case.dart';
+import 'package:fitness_app/app/features/auth/presentation/view_model/login/login_state.dart';
 
 @injectable
 class LoginCubit extends Cubit<LoginState> {

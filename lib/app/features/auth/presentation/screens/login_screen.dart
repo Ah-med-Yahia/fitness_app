@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:fitness_app/app/core/routing/app_routes_constant.dart';
 import 'package:fitness_app/app/core/theme/app_colors.dart';
 import 'package:fitness_app/app/core/utils/ui_utils.dart';
-import '../states/login_state.dart';
-import '../view_model/login_cubit.dart';
-import '../widgets/login_background_layers.dart';
+import '../widgets/auth/auth_background.dart';
+import '../view_model/login/login_state.dart';
+import '../view_model/login/login_cubit.dart';
 import '../widgets/login_form.dart';
 import '../widgets/login_glass_card.dart';
 import '../widgets/login_header.dart';
@@ -36,8 +36,8 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.transparent,
-      body: Stack(
-        children: [const LoginBackgroundLayers(), _buildContent(context)],
+      body: AuthBackground(
+        child: _buildContent(context),
       ),
     );
   }
