@@ -6,7 +6,7 @@ import 'package:fitness_app/features/auth/forget_password/data/models/response/f
 import 'package:fitness_app/features/auth/forget_password/data/models/response/reset_password_response_model.dart';
 import 'package:fitness_app/features/auth/forget_password/data/models/response/verify_code_response_model.dart';
 
-abstract interface class ForgetPasswordDataSource {
+abstract interface class ForgetPasswordRemoteDataSource {
   Future<BaseResponse<ForgetPasswordResponseModel>> forgetPassword(
     ForgetPasswordRequestModel request,
   );

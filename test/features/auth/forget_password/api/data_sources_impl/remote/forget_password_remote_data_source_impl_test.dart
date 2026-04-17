@@ -15,12 +15,12 @@ import 'forget_password_remote_data_source_impl_test.mocks.dart';
 
 @GenerateMocks([ForgetPasswordApiClient])
 void main() {
-  late ForgetPasswordDataSourceImpl dataSource;
+  late ForgetPasswordRemoteDataSourceImpl dataSource;
   late MockForgetPasswordApiClient mockApiClient;
 
   setUp(() {
     mockApiClient = MockForgetPasswordApiClient();
-    dataSource = ForgetPasswordDataSourceImpl(mockApiClient);
+    dataSource = ForgetPasswordRemoteDataSourceImpl(mockApiClient);
   });
 
   group('forgetPassword', () {

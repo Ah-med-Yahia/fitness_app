@@ -8,7 +8,7 @@ import 'package:injectable/injectable.dart';
 
 @Injectable(as: ForgetPasswordRepository)
 class ForgetPasswordRepositoryImpl implements ForgetPasswordRepository {
-  final ForgetPasswordDataSource _dataSource;
+  final ForgetPasswordRemoteDataSource _dataSource;
 
   ForgetPasswordRepositoryImpl(this._dataSource);
 

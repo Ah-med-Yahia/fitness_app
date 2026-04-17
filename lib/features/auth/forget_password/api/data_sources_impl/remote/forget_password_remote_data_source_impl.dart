@@ -10,11 +10,12 @@ import 'package:fitness_app/features/auth/forget_password/data/models/response/r
 import 'package:fitness_app/features/auth/forget_password/data/models/response/verify_code_response_model.dart';
 import 'package:injectable/injectable.dart';
 
-@Injectable(as: ForgetPasswordDataSource)
-class ForgetPasswordDataSourceImpl implements ForgetPasswordDataSource {
+@Injectable(as: ForgetPasswordRemoteDataSource)
+class ForgetPasswordRemoteDataSourceImpl
+    implements ForgetPasswordRemoteDataSource {
   final ForgetPasswordApiClient _apiClient;
 
-  ForgetPasswordDataSourceImpl(this._apiClient);
+  ForgetPasswordRemoteDataSourceImpl(this._apiClient);
 
   @override
   Future<BaseResponse<ForgetPasswordResponseModel>> forgetPassword(
