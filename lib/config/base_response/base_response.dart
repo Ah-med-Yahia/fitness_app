@@ -1,4 +1,3 @@
-
 import 'package:fitness_app/config/errors/app_exception.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

@@ -1,5 +1,3 @@
-
-
 import 'package:fitness_app/core/constants/validation_constants.dart';
 import 'package:fitness_app/core/validators/app_regex.dart';
 
