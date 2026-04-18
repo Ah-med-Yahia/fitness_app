@@ -1,0 +1,17 @@
+{
+  "app": {
+    "title": "Fitness App"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "first_name": "First Name",
+    "last_name": "Last Name"
+  },
+  "errors": {
+    "required": "This field is required",
+    "invalid_email": "Enter a valid email address"
+  }
+}

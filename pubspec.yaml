@@ -33,7 +33,8 @@ dependencies:
   pretty_dio_logger: ^1.4.0         
   flutter_easyloading: ^3.0.5
   easy_localization: ^3.0.8
-
+  wheel_slider: ^1.2.2
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -60,7 +61,7 @@ flutter:
   - assets/translations/
 
 flutter_gen:
-  output: lib/core/gen/
+  output: lib/app/core/gen/
   integrations:
     lottie: true
     flutter_svg: true
