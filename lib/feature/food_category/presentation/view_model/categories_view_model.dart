@@ -7,6 +7,7 @@ import '../../../../config/base_response/base_response.dart';
 import '../../../../config/base_state/base_state.dart';
 
 import '../../../../config/services/custom_cubit.dart';
+import '../../../../core/request/query_request.dart';
 import '../../../food/domain/request/query_meal_request.dart';
 import '../../domain/use_case/get_all_food_use_case.dart';
 import 'categories_event.dart';
@@ -72,32 +73,7 @@ class CategoriesViewModel
             ),
           ));
         },);
-    // switch (response) {
-    //   case SuccessResponse():
-    //     baseState = state.copyWith(
-    //       categoriesState: CategoryBaseState(
-    //         isLoading: false,
-    //         success: response.data,
-    //       ),
-    //     );
-    //     emit(baseState);
-    //     if (state.categoriesState.success?.categoriesEntity?.isNotEmpty ??
-    //         false) {
-    //       _getProductsCategory(
-    //         '${state.categoriesState.success?.categoriesEntity?[0].id}',
-    //     );
-    //     }
-    //     break;
-    //   case ErrorResponse():
-    //     baseState = state.copyWith(
-    //       categoriesState: CategoryBaseState(
-    //         isLoading: false,
-    //         error: response.error,
-    //       ),
-    //     );
-    //     emit(baseState);
-    //     break;
-    // }
+
   }
 
   void _getCategory({int? index,}) {
@@ -122,7 +98,7 @@ class CategoriesViewModel
       ),
     );
     final response = await _mealsCategoryUseCase.invoke(
-      QueryMealRequest(category: categoryId),
+      QueryRequest(queryKey:'c',queryValue: categoryId),
     );
     response.when(success: (data) {
       emit(

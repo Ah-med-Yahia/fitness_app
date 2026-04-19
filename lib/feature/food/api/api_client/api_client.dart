@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:fitness_app/feature/food/data/models/meal/meal_details_response.dart';
 
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
 
 import '../../../../core/constants/api_constants.dart';
+import '../../../../core/request/query_request.dart';
 import '../../data/models/meal/meals_response.dart';
 
 import '../../domain/request/query_meal_request.dart';
@@ -15,13 +17,10 @@ part 'api_client.g.dart';
 abstract class FoodDetailsApiClient {
   @factoryMethod
   factory FoodDetailsApiClient(Dio dio) = _FoodDetailsApiClient;
-
-  // @GET('${.products}/{productId}')
-  // Future<ProductDetailsDto> getProductDetails(
-  //     @Path("productId") String productId);
-
-  
   @GET(ApiConstants.meals)
   Future<MealsResponse> getMeals(
-      @Queries() QueryMealRequest queryMealRequest);
+      @Queries() QueryRequest query);
+  @GET(ApiConstants.mealDetails)
+  Future<MealDetailsResponse> getMealDetails(
+      @Queries() QueryRequest query);
 }

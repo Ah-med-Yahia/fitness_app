@@ -2,6 +2,7 @@ import 'package:fitness_app/core/routing/app_routes_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../feature/food/presentation/view/meal_details_screen.dart';
 import '../../feature/food_category/presentation/view/categories_screen.dart';
 
 abstract class AppRouter {
@@ -16,6 +17,12 @@ class RouteGenerator {
     switch (settings.name) {
       case AppRoutesConstants.foodCategoryRoute:
         return MaterialPageRoute(builder: (_) => const CategoriesScreen());
+        case AppRoutesConstants.foodDetailsRoute:
+          final String mealId = settings.arguments as String;
+          return MaterialPageRoute(
+            builder: (_) => MealDetailsScreen(mealId: mealId),
+            settings: settings,
+          );
         default
         : return unDefinedRoute();
     //   case Routes.splash:

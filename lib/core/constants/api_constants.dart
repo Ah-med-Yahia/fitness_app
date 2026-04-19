@@ -11,4 +11,5 @@ class ApiConstants {
   //==================== Food============================
   static const String foodCategories = '1/categories.php';
   static const String meals = '1/filter.php';
+  static const String mealDetails = '1/lookup.php';
 }

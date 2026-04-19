@@ -1,18 +1,19 @@
 
 
+import 'package:fitness_app/feature/food/data/models/meal/meal_details_response.dart';
+
 import '../../../../config/base_response/base_response.dart';
 
+import '../../../../core/request/query_request.dart';
 import '../../domain/request/query_meal_request.dart';
 import '../models/meal/meals_response.dart';
 
 
 abstract class MealRemoteDataSourceContract {
-  // Future<BaseResponse<ProductDetailsDto>> getProductDetails(String productId);
-  //
-  // Future<BaseResponse<UpdateCartResponse>> addProductToCart(
-  //     {String? productId, int? quantity});
+   Future<BaseResponse<MealDetailsResponse>> getMealDetails(QueryRequest query);
+
   Future<BaseResponse<MealsResponse>> getMeals(
-      QueryMealRequest queryProductRequest);
+      QueryRequest query);
 }
 
 
