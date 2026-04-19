@@ -15,13 +15,4 @@ class GetProductsCategoryIntent extends CategoriesIntent {
   GetProductsCategoryIntent({required this.categoryId});
 }
 
-// class GetSortedProducts extends CategoriesIntent {
-//   final Sort sort;
-//   final int index;
-//
-//   GetSortedProducts({required this.sort, required this.index});
-// }
-//
-// class ShowSortBottomSheet extends CategoriesIntent {}
-//
-// class NavigateToSearchScreen extends CategoriesIntent {}
+

@@ -12,20 +12,6 @@ class MealRemoteDataSourceImpl
     implements MealRemoteDataSourceContract {
   FoodDetailsApiClient apiClient;
   MealRemoteDataSourceImpl(this.apiClient);
-  // @override
-  // Future<BaseResponse<ProductDetailsDto>> getProductDetails(
-  //     String productId) async =>
-  //     executeApi(() => apiClient.getProductDetails(productId));
-  //
-  // @override
-  // Future<BaseResponse<UpdateCartResponse>> addProductToCart(
-  //     {String? productId, int? quantity}) async {
-  //   return await executeApi(() =>
-  //       apiClient.addProductToCart({
-  //         "product": productId,
-  //         "quantity": quantity
-  //       }));
-  // }
   @override
   Future<BaseResponse<MealsResponse>> getMeals(
       QueryMealRequest queryMealRequest) =>

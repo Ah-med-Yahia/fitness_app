@@ -36,8 +36,7 @@ class CategoriesViewModel
       categoriesState: const CategoryBaseState(isLoading: true),
     ));
     final response = await _categoriesUseCase.invoke();
-    //baseState=response.toBaseState() as CategoriesState;
-   // emit(baseState);
+
     response.when(success: (data) {
       baseState = state.copyWith(
         categoriesState: CategoryBaseState(
@@ -72,32 +71,7 @@ class CategoriesViewModel
             ),
           ));
         },);
-    // switch (response) {
-    //   case SuccessResponse():
-    //     baseState = state.copyWith(
-    //       categoriesState: CategoryBaseState(
-    //         isLoading: false,
-    //         success: response.data,
-    //       ),
-    //     );
-    //     emit(baseState);
-    //     if (state.categoriesState.success?.categoriesEntity?.isNotEmpty ??
-    //         false) {
-    //       _getProductsCategory(
-    //         '${state.categoriesState.success?.categoriesEntity?[0].id}',
-    //     );
-    //     }
-    //     break;
-    //   case ErrorResponse():
-    //     baseState = state.copyWith(
-    //       categoriesState: CategoryBaseState(
-    //         isLoading: false,
-    //         error: response.error,
-    //       ),
-    //     );
-    //     emit(baseState);
-    //     break;
-    // }
+
   }
 
   void _getCategory({int? index,}) {

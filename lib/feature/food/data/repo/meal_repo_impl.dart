@@ -10,31 +10,7 @@ import '../data_sources/meal_remote_data_source_contract.dart';
 @Injectable(as:MealRepoContract)
 class MealRepoImpl implements MealRepoContract {
   final MealRemoteDataSourceContract remoteDataSource;
-
   MealRepoImpl(this.remoteDataSource);
-
-  // @override
-  // Future<BaseResponse<ProductDetailsModel>> getProductDetails(String productId) async {
-  //   final response = await remoteDataSource.getProductDetails(productId);
-  //   switch (response) {
-  //     case SuccessResponse<ProductDetailsDto>():
-  //       return SuccessResponse<ProductDetailsModel>(data: response.data.toModel());
-  //     case ErrorResponse<ProductDetailsDto>():
-  //       return ErrorResponse<ProductDetailsModel>(error: response.error);
-  //   }
-  // }
-  //
-  // @override
-  // Future<BaseResponse<UpdateCartModel>> addProductToCart({String? productId, int? quantity}) async {
-  //   final response = await remoteDataSource.addProductToCart(productId: productId, quantity: quantity);
-  //   switch (response) {
-  //     case SuccessResponse<UpdateCartResponse>():
-  //       return SuccessResponse<UpdateCartModel>(data: response.data.toModel());
-  //     case ErrorResponse<UpdateCartResponse>():
-  //       return ErrorResponse<UpdateCartModel>(error: response.error);
-  //   }
-  // }
-
   @override
   Future<BaseResponse<MealsEntity>> getMeals(QueryMealRequest queryMealRequest) async {
     final response = await remoteDataSource.getMeals(queryMealRequest);
@@ -42,11 +18,5 @@ class MealRepoImpl implements MealRepoContract {
       success: (data) => BaseResponse.success( data.toEntity()),
       failure: (error) => BaseResponse.failure( error),
     );
-    // switch (response) {
-    //   case SuccessResponse<ProductsResponse>():
-    //     return SuccessResponse<ProductsEntity>(data: response.data.toProductsEntity());
-    //   case ErrorResponse<ProductsResponse>():
-    //     return ErrorResponse<ProductsEntity>(error: response.error);
-    // }
   }
 }

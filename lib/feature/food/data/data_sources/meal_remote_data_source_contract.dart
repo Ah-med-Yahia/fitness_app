@@ -7,10 +7,6 @@ import '../models/meal/meals_response.dart';
 
 
 abstract class MealRemoteDataSourceContract {
-  // Future<BaseResponse<ProductDetailsDto>> getProductDetails(String productId);
-  //
-  // Future<BaseResponse<UpdateCartResponse>> addProductToCart(
-  //     {String? productId, int? quantity});
   Future<BaseResponse<MealsResponse>> getMeals(
       QueryMealRequest queryProductRequest);
 }
