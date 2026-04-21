@@ -4,6 +4,7 @@ import 'package:fitness_app/config/di/di.dart';
 import 'package:fitness_app/core/constants/app_text_constants.dart';
 import 'package:fitness_app/core/constants/path_constant.dart';
 import 'package:fitness_app/fitness_app.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,6 +15,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
 
   runApp(
+    //const FitnessApp(),
     EasyLocalization(
       supportedLocales: const [
         Locale(AppTextConstants.enLangKey),
@@ -25,6 +27,7 @@ void main() async {
       useOnlyLangCode: true,
       saveLocale: false,
       child: const FitnessApp(),
+
     ),
   );
 }
