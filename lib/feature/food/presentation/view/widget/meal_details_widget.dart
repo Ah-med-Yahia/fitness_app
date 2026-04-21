@@ -1,181 +1,130 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/feature/food/data/models/meal/meal_details_response.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/theme/app_colors.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-class MealDetailsWidget extends StatelessWidget {
-  const MealDetailsWidget({super.key,required this.meal});
+
+class MealDetailsWidget extends StatefulWidget {
+  const MealDetailsWidget({super.key,required this.meal,
+  });
 final MealDetailsResponse meal;
+//final MealState mealState;
+
+  @override
+  State<MealDetailsWidget> createState() => _MealDetailsWidgetState();
+}
+
+class _MealDetailsWidgetState extends State<MealDetailsWidget> {
+ late final YoutubePlayerController _controller;
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final String videoId = YoutubePlayerController.convertUrlToId(
+      widget.meal.meals?[0].strYoutube??'',
+    )??'';
+    _controller= YoutubePlayerController.fromVideoId(
+ videoId:videoId, // The ID from the YouTube URL
+ autoPlay: false,
+ params: const YoutubePlayerParams(
+ showControls: true,
+ showFullscreenButton: true,
+   origin: 'https://www.youtube-nocookie.com',
+ ),
+ );
+   // _controller = YoutubePlayerController
+  }
   @override
   Widget build(BuildContext context) {
-    return  Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Back button and header area
-        Row(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(40),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 10,
-                    offset: const Offset(0, 2),
+    return  Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            // 2. Wrap the player in a YoutubePlayer widget
+            child: YoutubePlayer(
+              controller: _controller,
+              aspectRatio: 16 / 9,
+            ),
+          ),
+          const SizedBox(height: 24),
+          Stack(
+            alignment: AlignmentGeometry.bottomCenter,
+            children: [
+              Container(
+                height:500,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                 // color: const Color(0xFFE8ECF0),
+                //  borderRadius: BorderRadius.circular(24),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      widget.meal.meals?[0].strMealThumb??'',
+                    ),
+                    fit: BoxFit.cover,
                   ),
-                ],
-              ),
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back_ios_new, size: 20),
-                onPressed: () {},
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(
-                  minWidth: 40,
-                  minHeight: 40,
                 ),
               ),
-            ),
-            const Spacer(),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(40),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 10,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: IconButton(
-                icon: const Icon(Icons.favorite_border, size: 22),
-                onPressed: () {},
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(
-                  minWidth: 40,
-                  minHeight: 40,
+              Container(
+                color: AppColors.black.withValues(alpha: .7),
+                padding: const EdgeInsets.all(4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.meal.meals?[0].strMeal??'',
+                      style: const TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.white,
+                        letterSpacing: -0.3,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    // Description
+                    Text(
+                      widget.meal.meals?[0].strInstructions??'',
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        color: AppColors.white,
+                        height: 1.4,
+                      ),
+                    ),
+                  ],
                 ),
               ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          // Ingredients Title
+           Text(
+            'Ingredients'.tr(),
+           ),
+          const SizedBox(height: 16),
+
+          // Ingredients List
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: AppColors.black,
+              borderRadius: BorderRadius.circular(24),
             ),
-          ],
-        ),
-        const SizedBox(height: 20),
-
-        // Recipe Image placeholder
-        Container(
-          height: 220,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: const Color(0xFFE8ECF0),
-            borderRadius: BorderRadius.circular(24),
-            image: DecorationImage(
-              image: NetworkImage(
-                meal.meals?[0].strMealThumb??'',
-              ),
-              fit: BoxFit.cover,
+            child: Column(
+              children:
+                  fillIngredientsList().map(
+                    (e) {
+                      return _buildIngredientRow(e.strIngredient??'', e.strQuantity??'');
+                    },
+                  ).toList()
             ),
           ),
-        ),
-        const SizedBox(height: 24),
 
-        // Title
-         Text(
-          meal.meals?[0].strMeal??'',
-          style: const TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.w700,
-            color: AppColors.white,
-            letterSpacing: -0.3,
-          ),
-        ),
-        const SizedBox(height: 12),
-
-        // Description
-         Text(
-         meal.meals?[0].strInstructions??'',
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w400,
-            color: AppColors.white,
-            height: 1.4,
-          ),
-        ),
-        const SizedBox(height: 24),
-
-        // Nutrition Row
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _buildNutritionCard('100', 'K Energy', 'kcal'),
-            _buildNutritionCard('15', 'G Protein', 'g'),
-            _buildNutritionCard('58', 'G Carbs', 'g'),
-            _buildNutritionCard('20', 'G Fat', 'g'),
-          ],
-        ),
-        const SizedBox(height: 32),
-
-        // Ingredients Title
-        const Text(
-          'Ingredients',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            color: Color(0xFF1A1A1A),
-          ),
-        ),
-        const SizedBox(height: 16),
-
-        // Ingredients List
-        Column(
-          children: [
-            _buildIngredientRow('Meal Breasts', '250g'),
-            const Divider(height: 1, thickness: 1, color: Color(0xFFF0F0F0)),
-            _buildIngredientRow('Unsalted Butter', '1tbsp'),
-            const Divider(height: 1, thickness: 1, color: Color(0xFFF0F0F0)),
-            _buildIngredientRow('Sesame Or Vegetable Oil', '2 Tsp'),
-            const Divider(height: 1, thickness: 1, color: Color(0xFFF0F0F0)),
-            _buildIngredientRow('Fresh Ginger', '2 Tsp'),
-            const Divider(height: 1, thickness: 1, color: Color(0xFFF0F0F0)),
-            _buildIngredientRow('Large Eggs', '100 G'),
-            const Divider(height: 1, thickness: 1, color: Color(0xFFF0F0F0)),
-            _buildIngredientRow('Large Eggs', '100 G'),
-            const Divider(height: 1, thickness: 1, color: Color(0xFFF0F0F0)),
-            _buildIngredientRow('Large Eggs', '100 G'),
-            const Divider(height: 1, thickness: 1, color: Color(0xFFF0F0F0)),
-            _buildIngredientRow('Large eggs', '100 G'),
-            const Divider(height: 1, thickness: 1, color: Color(0xFFF0F0F0)),
-            _buildIngredientRow('Large Eggs', '100 G'),
-            const Divider(height: 1, thickness: 1, color: Color(0xFFF0F0F0)),
-            _buildIngredientRow('Large Eggs', '100 g'),
-          ],
-        ),
-        const SizedBox(height: 40),
-
-        // Start Cooking Button
-        SizedBox(
-          width: double.infinity,
-          height: 56,
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF1A1A1A),
-              foregroundColor: Colors.white,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              textStyle: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 0.3,
-              ),
-            ),
-            child: const Text('Start Cooking'),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -221,27 +170,53 @@ final MealDetailsResponse meal;
   Widget _buildIngredientRow(String name, String quantity) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
-          Text(
-            name,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF333333),
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                name,
+              ),
+              Text(
+                quantity,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color:AppColors.primary,
+                ),
+              ),
+            ],
           ),
-          Text(
-            quantity,
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF888888),
-            ),
+          const Divider(
+            color:Colors.grey,
+            thickness:.35,
+
           ),
         ],
       ),
     );
   }
+  List<IngredientsMeal> fillIngredientsList(){
+    final List<IngredientsMeal> ingredientsList = [];
+    for (int i = 1; i <= 20; i++) {
+      final String ingredientName = 'strIngredient$i';
+      final String ingredientQuantity = 'strMeasure$i';
+      final String? ingredient = widget.meal.meals?[0].toJson()[ingredientName];
+      final String? quantity = widget.meal.meals?[0].toJson()[ingredientQuantity];
+      if (ingredient != null && ingredient.isNotEmpty) {
+        ingredientsList.add(IngredientsMeal(
+          strIngredient: ingredient,
+          strQuantity: quantity,
+        ));
+      }
+    }
+  return ingredientsList;
+  }
+}
+class IngredientsMeal
+{
+  String? strIngredient;
+  String? strQuantity;
+  IngredientsMeal({this.strIngredient,this.strQuantity});
 }

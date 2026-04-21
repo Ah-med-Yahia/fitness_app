@@ -2,5 +2,6 @@
   "loading": "تحميل",
   "retry": "اعد المحاولة",
   "foodRecommendation": "اقتراحات الطعام",
-  "noCategoriesAvailable": "ليس هناك تصنيفات متاحة"
+  "noCategoriesAvailable": "ليس هناك تصنيفات متاحة",
+  "ingredients": "المكونات"
 }

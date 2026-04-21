@@ -13,7 +13,7 @@ import 'meal_intent.dart';
 class MealViewModel  extends Cubit<MealState>{
   final GetMealDetailsUseCase _getMealUseCase;
   MealViewModel(this._getMealUseCase):super(const MealState(mealState: BaseState()));
-  Future<void> _getMealDetails(QueryRequest query)async
+  Future<void> _getMealDetails(DynamicQueries query)async
   {
     emit(state.copyWith(mealState: const BaseState(isLoading: true)));
    final response=await _getMealUseCase.invoke(query);

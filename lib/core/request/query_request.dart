@@ -1,21 +1,4 @@
 import 'package:equatable/equatable.dart';
-
-class QueryRequest extends Equatable{
-  final String queryKey;
-  final String? queryValue;
-  const QueryRequest({required this.queryKey,this.queryValue});
-  Map<String, dynamic> toJson() {
-    return {queryKey: queryValue,}
-      ..removeWhere((key, value) => value == null);
-  }
-
-  @override
-  // TODO: implement props
-  List<Object?> get props => [];
-
-}
-
-
 class DynamicQueries extends Equatable {
   final List<QueryData> queriesData;
 

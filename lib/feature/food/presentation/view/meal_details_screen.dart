@@ -2,6 +2,7 @@ import 'package:fitness_app/config/di/di.dart';
 import 'package:fitness_app/core/request/query_request.dart';
 import 'package:fitness_app/core/reusable_widgets/custom_error_widget.dart';
 import 'package:fitness_app/core/reusable_widgets/loading_widget.dart';
+import 'package:fitness_app/core/theme/app_colors.dart';
 import 'package:fitness_app/feature/food/presentation/view/widget/meal_details_widget.dart';
 import 'package:fitness_app/feature/food/presentation/view_model/meal_intent.dart';
 import 'package:fitness_app/feature/food/presentation/view_model/meal_state.dart';
@@ -17,9 +18,13 @@ final MealViewModel mealViewModel=getIt<MealViewModel>();
   Widget build(BuildContext context) {
     return BlocBuilder<MealViewModel,MealState>(
       bloc: mealViewModel..doIntent(GetMealDetailsIntent(
-        QueryRequest(queryKey: 'i',queryValue: mealId)
+        DynamicQueries(queriesData: [
+          QueryData(key: 'i',value: mealId)
+        ])
+       // QueryRequest(queryKey: 'i',queryValue: mealId)
       )),
       builder:(context, state) =>  Scaffold(
+        backgroundColor: AppColors.black,
         body: SafeArea(child: SingleChildScrollView(
           child:state.mealState.isLoading?const LoadingWidget():
           state.mealState.data!=null?
@@ -29,7 +34,9 @@ final MealViewModel mealViewModel=getIt<MealViewModel>();
                       state.mealState.error?.message??''
                       , onRetry:() {
                         mealViewModel.doIntent(GetMealDetailsIntent(
-                          QueryRequest(queryKey: 'i',queryValue: mealId)
+                            DynamicQueries(queriesData: [
+                              QueryData(key: 'i',value: mealId)
+                            ])
                         ));
                       },):const SizedBox()
           ,

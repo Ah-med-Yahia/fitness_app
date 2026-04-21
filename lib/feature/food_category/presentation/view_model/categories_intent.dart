@@ -1,27 +1,25 @@
 
 
-sealed class CategoriesIntent {}
+import 'package:fitness_app/core/request/query_request.dart';
 
-class CategoriesAction extends CategoriesIntent {}
+sealed class CategoriesIntent {
+  final DynamicQueries query;
+  CategoriesIntent(this.query);
+}
+
+class CategoriesAction extends CategoriesIntent {
+  CategoriesAction(super.query);
+
+}
 
 class GetCategoryIntent extends CategoriesIntent {
   final int index;
 
-  GetCategoryIntent({required this.index});
+  GetCategoryIntent(super.query, {required this.index});
 }
 
 class GetProductsCategoryIntent extends CategoriesIntent {
-  final String categoryId;
-  GetProductsCategoryIntent({required this.categoryId});
+
+  GetProductsCategoryIntent(super.query);
 }
 
-// class GetSortedProducts extends CategoriesIntent {
-//   final Sort sort;
-//   final int index;
-//
-//   GetSortedProducts({required this.sort, required this.index});
-// }
-//
-// class ShowSortBottomSheet extends CategoriesIntent {}
-//
-// class NavigateToSearchScreen extends CategoriesIntent {}

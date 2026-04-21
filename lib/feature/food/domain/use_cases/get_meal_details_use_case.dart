@@ -8,7 +8,7 @@ import '../../data/models/meal/meal_details_response.dart';
 class GetMealDetailsUseCase {
   final MealRepoContract _mealRepo;
   GetMealDetailsUseCase(this._mealRepo);
-  Future<BaseResponse<MealDetailsResponse>> invoke(QueryRequest query){
+  Future<BaseResponse<MealDetailsResponse>> invoke(DynamicQueries query){
     return _mealRepo.getMealDetails(query);
   }
   }
