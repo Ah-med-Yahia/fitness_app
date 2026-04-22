@@ -1,38 +1,22 @@
-class ForgetPasswordSideEffects {
+sealed class ForgetPasswordSideEffects {
   ForgetPasswordSideEffects();
 }
 
-// Provide Email Intents
-class ShowErrorProvideEmailSideEffect extends ForgetPasswordSideEffects {
+class ShowLoading extends ForgetPasswordSideEffects {}
+
+class HideLoading extends ForgetPasswordSideEffects {}
+
+class ShowError extends ForgetPasswordSideEffects {
   final String error;
-  ShowErrorProvideEmailSideEffect({required this.error});
+  ShowError({required this.error});
 }
 
-class NavigateToVerifyCodeSideEffect extends ForgetPasswordSideEffects {}
-
-// Verify Code Intents
-class ShowErrorVerifyCodeSideEffect extends ForgetPasswordSideEffects {
-  final String error;
-  ShowErrorVerifyCodeSideEffect({required this.error});
-}
-
-class ShowSuccessVerifyCodeSideEffect extends ForgetPasswordSideEffects {
+class ShowSuccessMessage extends ForgetPasswordSideEffects {
   final String message;
-  ShowSuccessVerifyCodeSideEffect({required this.message});
+  ShowSuccessMessage({required this.message});
 }
 
-class NavigateToResetPasswordSideEffect extends ForgetPasswordSideEffects {}
-
-// Reset Password Intents
-
-class ShowLoadingResetPasswordSideEffect extends ForgetPasswordSideEffects {}
-
-class HideLoadingResetPasswordSideEffect extends ForgetPasswordSideEffects {}
-
-class ShowErrorResetPasswordSideEffect extends ForgetPasswordSideEffects {
-  final String error;
-  ShowErrorResetPasswordSideEffect({required this.error});
-}
+class NavigateToNextPageViewSideEffect extends ForgetPasswordSideEffects {}
 
 class NavigateToLoginSideEffect extends ForgetPasswordSideEffects {
   final String message;

@@ -24,7 +24,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
   final StreamController<ForgetPasswordSideEffects> _streamController =
       StreamController<ForgetPasswordSideEffects>.broadcast();
 
-  Stream<ForgetPasswordSideEffects> get uiIntents => _streamController.stream;
+  Stream<ForgetPasswordSideEffects> get sideEffects => _streamController.stream;
 
   ForgetPasswordCubit({
     required this.forgetPasswordUseCase,
@@ -36,30 +36,33 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
     switch (intent) {
       case EmailChangedIntent(email: final email):
         _handleEmailChanged(email);
-        break;
+
       case SendOtpIntent():
         _handleSendOtp();
-        break;
+
       case OtpCodeChangedIntent(otpCode: final otpCode):
         _handleOtpCodeChanged(otpCode);
-        break;
+
       case ConfirmOtpCodeIntent():
         _handleConfirmOtpCode();
-        break;
+
       case ResendOtpCodeIntent(email: final email):
         _handleResendOtpCode(email);
-        break;
+
       case NewPasswordChangedIntent(newPassword: final newPassword):
         _handleNewPasswordChanged(newPassword);
-        break;
+
       case ConfirmNewPasswordChangedIntent(
         confirmNewPassword: final confirmNewPassword,
       ):
         _handleConfirmNewPasswordChanged(confirmNewPassword);
-        break;
+
       case ResetPasswordIntent():
         _handleResetPassword();
-        break;
+      case ToggleObscurePasswordIntent():
+        _handleToggleObscurePassword();
+      case ToggleObscureConfirmPasswordIntent():
+        _handleToggleObscureConfirmPassword();
     }
   }
 
@@ -72,9 +75,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
   Future<void> _handleSendOtp() async {
     if (!state.isEmailValid) {
       _streamController.add(
-        ShowErrorProvideEmailSideEffect(
-          error: AppTextConstants.pleaseEnterValidEmail,
-        ),
+        ShowError(error: AppTextConstants.pleaseEnterValidEmail),
       );
       return;
     }
@@ -84,13 +85,11 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
     response.when(
       success: (_) {
         emit(state.copyWith(isSendOtpLoading: false));
-        _streamController.add(NavigateToVerifyCodeSideEffect());
+        _streamController.add(NavigateToNextPageViewSideEffect());
       },
       failure: (error) {
         emit(state.copyWith(isSendOtpLoading: false));
-        _streamController.add(
-          ShowErrorProvideEmailSideEffect(error: error.message),
-        );
+        _streamController.add(ShowError(error: error.message));
       },
     );
   }
@@ -109,7 +108,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
   Future<void> _handleConfirmOtpCode() async {
     if (!state.isOtpCodeValid) {
       _streamController.add(
-        ShowErrorVerifyCodeSideEffect(error: AppTextConstants.pleaseEnterValidOtp),
+        ShowError(error: AppTextConstants.pleaseEnterValidOtp),
       );
       return;
     }
@@ -119,11 +118,11 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
     response.when(
       success: (_) {
         emit(state.copyWith(isVerifyOtpLoading: false));
-        _streamController.add(NavigateToResetPasswordSideEffect());
+        _streamController.add(NavigateToNextPageViewSideEffect());
       },
       failure: (error) {
         emit(state.copyWith(isVerifyOtpLoading: false));
-        _streamController.add(ShowErrorVerifyCodeSideEffect(error: error.message));
+        _streamController.add(ShowError(error: error.message));
       },
     );
   }
@@ -136,14 +135,12 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
       success: (_) {
         emit(state.copyWith(isVerifyOtpLoading: false));
         _streamController.add(
-          ShowSuccessVerifyCodeSideEffect(
-            message: AppTextConstants.otpSentSuccessfully,
-          ),
+          ShowSuccessMessage(message: AppTextConstants.otpSentSuccessfully),
         );
       },
       failure: (error) {
         emit(state.copyWith(isVerifyOtpLoading: false));
-        _streamController.add(ShowErrorVerifyCodeSideEffect(error: error.message));
+        _streamController.add(ShowError(error: error.message));
       },
     );
   }
@@ -185,29 +182,23 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
   Future<void> _handleResetPassword() async {
     if (state.newPassword.isEmpty || state.confirmNewPassword.isEmpty) {
       _streamController.add(
-        ShowErrorResetPasswordSideEffect(
-          error: AppTextConstants.pleaseEnterValidPassword,
-        ),
+        ShowError(error: AppTextConstants.pleaseEnterValidPassword),
       );
       return;
     }
     if (state.newPassword.length < 8) {
       _streamController.add(
-        ShowErrorResetPasswordSideEffect(
-          error: ValidationConstants.passwordMinLength,
-        ),
+        ShowError(error: ValidationConstants.passwordMinLength),
       );
       return;
     }
     if (state.newPassword != state.confirmNewPassword) {
       _streamController.add(
-        ShowErrorResetPasswordSideEffect(
-          error: ValidationConstants.passwordsDoNotMatch,
-        ),
+        ShowError(error: ValidationConstants.passwordsDoNotMatch),
       );
       return;
     }
-    _streamController.add(ShowLoadingResetPasswordSideEffect());
+    _streamController.add(ShowLoading());
     final request = ResetPasswordRequestModel(
       newPassword: state.newPassword,
       email: state.email,
@@ -215,7 +206,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
     final response = await resetPasswordUseCase(request);
     response.when(
       success: (_) {
-        _streamController.add(HideLoadingResetPasswordSideEffect());
+        _streamController.add(HideLoading());
         _streamController.add(
           NavigateToLoginSideEffect(
             message: AppTextConstants.passwordResetSuccessfully,
@@ -223,11 +214,19 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordStates> {
         );
       },
       failure: (error) {
-        _streamController.add(HideLoadingResetPasswordSideEffect());
-        _streamController.add(
-          ShowErrorResetPasswordSideEffect(error: error.message),
-        );
+        _streamController.add(HideLoading());
+        _streamController.add(ShowError(error: error.message));
       },
+    );
+  }
+
+  void _handleToggleObscurePassword() {
+    emit(state.copyWith(isObscurePassword: !state.isObscurePassword));
+  }
+
+  void _handleToggleObscureConfirmPassword() {
+    emit(
+      state.copyWith(isObscureConfirmPassword: !state.isObscureConfirmPassword),
     );
   }
 
