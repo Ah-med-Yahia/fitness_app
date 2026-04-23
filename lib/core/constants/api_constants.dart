@@ -8,4 +8,7 @@ class ApiConstants {
   //==================== Auth============================
   static const String signIn = 'auth/signin';
   static const String signUp = 'auth/signup';
+  static const String forgotPasswordEndpoint = 'auth/forgotPassword';
+  static const String verifyResetCodeEndpoint = 'auth/verifyResetCode';
+  static const String resetPasswordEndpoint = 'auth/resetPassword';
 }

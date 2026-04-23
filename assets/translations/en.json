@@ -1,0 +1,31 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "done": "Done"
+  },
+  "auth": {
+    "email": "Email",
+    "forgetPassword": "Forget Password",
+    "enterYourEmail": "Enter your email",
+    "sendOtp": "Send OTP",
+    "otpCode": "OTP Code",
+    "enterYourOtpCheckYourEmail": "Enter Your OTP - Check your email",
+    "didntRecieveVerificationCode": "Didn't receive verification code?",
+    "resendCode": "Resend Code",
+    "makeSureIts8CharactersOrMore": "Make sure it's 8 characters or more",
+    "createNewPassword": "Create New Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password"
+  },
+  "validation": {
+    "pleaseEnterValidEmail": "Please enter a valid email",
+    "pleaseEnterValidOtp": "Please enter a valid OTP",
+    "pleaseEnterValidPassword": "Please enter a valid password"
+  },
+  "messages": {
+    "otpSentSuccessfully": "OTP sent successfully",
+    "passwordResetSuccessfully": "Password reset successfully"
+  }
+}

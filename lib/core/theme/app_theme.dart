@@ -98,6 +98,8 @@ class AppTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
+        disabledBackgroundColor: AppColors.primary.withValues(alpha: .6),
+        disabledForegroundColor: AppColors.white,
         foregroundColor: AppColors.white,
         textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -109,8 +111,11 @@ class AppTheme {
       prefixIconColor: AppColors.white,
       suffixIconColor: AppColors.white,
       labelStyle: const TextStyle(color: AppColors.white),
-      hintStyle: const TextStyle(color: AppColors.white),
-
+      hintStyle: const TextStyle(
+        color: AppColors.white,
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+      ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
         borderSide: const BorderSide(color: AppColors.white, width: 1.5),
