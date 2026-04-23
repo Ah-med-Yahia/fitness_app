@@ -1,0 +1,31 @@
+{
+  "common": {
+    "loading": "جارٍ التحميل...",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "done": "تم"
+  },
+  "auth": {
+    "email": "البريد الإلكتروني",
+    "forgetPassword": "نسيت كلمة المرور",
+    "enterYourEmail": "أدخل بريدك الإلكتروني",
+    "sendOtp": "إرسال رمز التحقق",
+    "otpCode": "رمز التحقق",
+    "enterYourOtpCheckYourEmail": "أدخل رمز التحقق - تحقق من بريدك الإلكتروني",
+    "didntRecieveVerificationCode": "لم تستلم رمز التحقق؟",
+    "resendCode": "إعادة إرسال الرمز",
+    "makeSureIts8CharactersOrMore": "تأكد من أنها 8 أحرف أو أكثر",
+    "createNewPassword": "إنشاء كلمة مرور جديدة",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور"
+  },
+  "validation": {
+    "pleaseEnterValidEmail": "يرجى إدخال بريد إلكتروني صحيح",
+    "pleaseEnterValidOtp": "يرجى إدخال رمز تحقق صحيح",
+    "pleaseEnterValidPassword": "يرجى إدخال كلمة مرور صحيحة"
+  },
+  "messages": {
+    "otpSentSuccessfully": "تم إرسال رمز التحقق بنجاح",
+    "passwordResetSuccessfully": "تمت إعادة تعيين كلمة المرور بنجاح"
+  }
+}

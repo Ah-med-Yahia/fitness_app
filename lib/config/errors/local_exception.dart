@@ -1,4 +1,3 @@
-
 import 'package:fitness_app/config/errors/app_exception.dart';
 
 sealed class LocalException extends AppException {
