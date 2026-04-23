@@ -1,44 +1,31 @@
 {
-    "auth": {
-        "login": {
-            "title": "Login",
-            "welcomeBack": "Welcome Back",
-            "email": "Email",
-            "password": "Password",
-            "forgotPassword": "Forgot Password?",
-            "login": "Login",
-            "dontHaveAccount": "Don't have an account?",
-            "signUp": "Sign Up"
-        },
-        "register": {
-            "title": "Register",
-            "name": "Name",
-            "email": "Email",
-            "password": "Password",
-            "confirmPassword": "Confirm Password",
-            "register": "Register",
-            "alreadyHaveAccount": "Already have an account?",
-            "login": "Login"
-        },
-        "forgetPassword": {
-            "title": "Forget Password",
-            "email": "Email",
-            "send": "Send",
-            "backToLogin": "Back to Login"
-        },
-        "verifyCode": {
-            "title": "Verify Code",
-            "codeSent": "Code sent to your email",
-            "enterCode": "Enter the code sent to your email",
-            "didntReceiveCode": "Didn't receive a code?",
-            "resendCode": "Resend Code",
-            "verify": "Verify"
-        },
-        "resetPassword": {
-            "title": "Reset Password",
-            "newPassword": "New Password",
-            "confirmNewPassword": "Confirm New Password",
-            "reset": "Reset"
-        }
-    }
+  "common": {
+    "loading": "Loading...",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "done": "Done"
+  },
+  "auth": {
+    "email": "Email",
+    "forgetPassword": "Forget Password",
+    "enterYourEmail": "Enter your email",
+    "sendOtp": "Send OTP",
+    "otpCode": "OTP Code",
+    "enterYourOtpCheckYourEmail": "Enter Your OTP - Check your email",
+    "didntRecieveVerificationCode": "Didn't receive verification code?",
+    "resendCode": "Resend Code",
+    "makeSureIts8CharactersOrMore": "Make sure it's 8 characters or more",
+    "createNewPassword": "Create New Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password"
+  },
+  "validation": {
+    "pleaseEnterValidEmail": "Please enter a valid email",
+    "pleaseEnterValidOtp": "Please enter a valid OTP",
+    "pleaseEnterValidPassword": "Please enter a valid password"
+  },
+  "messages": {
+    "otpSentSuccessfully": "OTP sent successfully",
+    "passwordResetSuccessfully": "Password reset successfully"
+  }
 }

@@ -1,43 +1,31 @@
 {
-    "auth": {
-        "login": {
-            "title": "Login",
-            "email": "Email",
-            "password": "Password",
-            "forgotPassword": "Forgot Password?",
-            "login": "Login",
-            "dontHaveAccount": "Don't have an account?",
-            "signUp": "Sign Up"
-        },
-        "register": {
-            "title": "Register",
-            "name": "Name",
-            "email": "Email",
-            "password": "Password",
-            "confirmPassword": "Confirm Password",
-            "register": "Register",
-            "alreadyHaveAccount": "Already have an account?",
-            "login": "Login"
-        },
-        "forgetPassword": {
-            "title": "Forget Password",
-            "email": "Email",
-            "send": "Send",
-            "backToLogin": "Back to Login"
-        },
-        "verifyCode": {
-            "title": "Verify Code",
-            "codeSent": "Code sent to your email",
-            "enterCode": "Enter the code sent to your email",
-            "didntReceiveCode": "Didn't receive a code?",
-            "resendCode": "Resend Code",
-            "verify": "Verify"
-        },
-        "resetPassword": {
-            "title": "Reset Password",
-            "newPassword": "New Password",
-            "confirmNewPassword": "Confirm New Password",
-            "reset": "Reset"
-        }
-    }
+  "common": {
+    "loading": "جارٍ التحميل...",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "done": "تم"
+  },
+  "auth": {
+    "email": "البريد الإلكتروني",
+    "forgetPassword": "نسيت كلمة المرور",
+    "enterYourEmail": "أدخل بريدك الإلكتروني",
+    "sendOtp": "إرسال رمز التحقق",
+    "otpCode": "رمز التحقق",
+    "enterYourOtpCheckYourEmail": "أدخل رمز التحقق - تحقق من بريدك الإلكتروني",
+    "didntRecieveVerificationCode": "لم تستلم رمز التحقق؟",
+    "resendCode": "إعادة إرسال الرمز",
+    "makeSureIts8CharactersOrMore": "تأكد من أنها 8 أحرف أو أكثر",
+    "createNewPassword": "إنشاء كلمة مرور جديدة",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور"
+  },
+  "validation": {
+    "pleaseEnterValidEmail": "يرجى إدخال بريد إلكتروني صحيح",
+    "pleaseEnterValidOtp": "يرجى إدخال رمز تحقق صحيح",
+    "pleaseEnterValidPassword": "يرجى إدخال كلمة مرور صحيحة"
+  },
+  "messages": {
+    "otpSentSuccessfully": "تم إرسال رمز التحقق بنجاح",
+    "passwordResetSuccessfully": "تمت إعادة تعيين كلمة المرور بنجاح"
+  }
 }

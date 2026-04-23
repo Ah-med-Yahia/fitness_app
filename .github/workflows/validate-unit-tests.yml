@@ -3,7 +3,7 @@ name: Validate Unit Tests
 on:
   pull_request:
     branches:
-      - develop
+      - development
     types:
       - opened
       - synchronize

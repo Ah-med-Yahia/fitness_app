@@ -73,8 +73,11 @@ class _EmailPageViewState extends State<EmailPageView> {
                           );
                         },
                         cursorColor: AppColors.white,
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.email_outlined, size: 25),
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(
+                            Icons.email_outlined,
+                            size: 25,
+                          ),
                           hintText: AppTextConstants.email,
                         ),
                         validator: (value) =>
