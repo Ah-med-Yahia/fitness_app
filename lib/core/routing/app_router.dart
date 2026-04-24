@@ -10,7 +10,7 @@ import '../../features/auth/presentation/view/screens/login_screen.dart';
 
 abstract class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutesConstants.forgetPasswordRoute,
+    initialLocation: AppRoutesConstants.signInRoute,
     routes: [
       GoRoute(
         path: AppRoutesConstants.forgetPasswordRoute,
