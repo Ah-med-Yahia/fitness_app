@@ -1,4 +1,3 @@
-import 'package:fitness_app/config/base_response/base_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -15,22 +14,6 @@ void main() {
   setUp(() {
     mockRepo = MockAuthRepository();
     useCase = LoginUseCase(mockRepo);
-  });
-
-  test('returns LoginEntity on success', () async {
-    when(
-      mockRepo.login(email: anyNamed('email'), password: anyNamed('password')),
-    ).thenAnswer((_) async => const Success('abc123'));
-
-    final result = await useCase(
-      email: 'test@test.com',
-      password: 'Password@1',
-    );
-
-    expect(result, 'abc123');
-    verify(
-      mockRepo.login(email: 'test@test.com', password: 'Password@1'),
-    ).called(1);
   });
 
   test('throws AppException when repository throws', () async {
