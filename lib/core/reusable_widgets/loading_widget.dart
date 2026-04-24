@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
+
 class LoadingWidget extends StatelessWidget {
   const LoadingWidget({super.key});
 
@@ -18,10 +19,7 @@ class LoadingWidget extends StatelessWidget {
       child: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircularProgressIndicator(
-            color: AppColors.primary,
-            strokeWidth: 3,
-          ),
+          CircularProgressIndicator(color: AppColors.primary, strokeWidth: 3),
           SizedBox(height: 16),
           // Text(
           //   AppLocale(context).loading,

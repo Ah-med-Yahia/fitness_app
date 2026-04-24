@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
+
 class CustomErrorWidget extends StatelessWidget {
   const CustomErrorWidget({
     super.key,
@@ -21,14 +22,9 @@ class CustomErrorWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(errorMessage,style: TextStyle(
-            color: AppColors.black
-          ),),
+          Text(errorMessage, style: const TextStyle(color: AppColors.black)),
           const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: onRetry,
-            child: const Text('retry'),
-          ),
+          ElevatedButton(onPressed: onRetry, child: const Text('retry')),
         ],
       ),
     );

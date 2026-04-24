@@ -1,5 +1,3 @@
-
-
 import 'package:fitness_app/core/request/query_request.dart';
 
 sealed class CategoriesIntent {
@@ -9,7 +7,6 @@ sealed class CategoriesIntent {
 
 class CategoriesAction extends CategoriesIntent {
   CategoriesAction(super.query);
-
 }
 
 class GetCategoryIntent extends CategoriesIntent {
@@ -19,7 +16,5 @@ class GetCategoryIntent extends CategoriesIntent {
 }
 
 class GetProductsCategoryIntent extends CategoriesIntent {
-
   GetProductsCategoryIntent(super.query);
 }
-

@@ -11,36 +11,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MealDetailsScreen extends StatelessWidget {
-   MealDetailsScreen({super.key,required this.mealId});
+  MealDetailsScreen({super.key, required this.mealId});
   final String mealId;
-final MealViewModel mealViewModel=getIt<MealViewModel>();
+  final MealViewModel mealViewModel = getIt<MealViewModel>();
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MealViewModel,MealState>(
-      bloc: mealViewModel..doIntent(GetMealDetailsIntent(
-        DynamicQueries(queriesData: [
-          QueryData(key: 'i',value: mealId)
-        ])
-       // QueryRequest(queryKey: 'i',queryValue: mealId)
-      )),
-      builder:(context, state) =>  Scaffold(
+    return BlocBuilder<MealViewModel, MealState>(
+      bloc: mealViewModel
+        ..doIntent(
+          GetMealDetailsIntent(
+            DynamicQueries(
+              queriesData: [QueryData(key: 'i', value: mealId)],
+            ),
+            // QueryRequest(queryKey: 'i',queryValue: mealId)
+          ),
+        ),
+      builder: (context, state) => Scaffold(
         backgroundColor: AppColors.black,
-        body: SafeArea(child: SingleChildScrollView(
-          child:state.mealState.isLoading?const LoadingWidget():
-          state.mealState.data!=null?
-              MealDetailsWidget(meal: state.mealState.data!):
-              state.mealState.error!=null?
-                  CustomErrorWidget(errorMessage:
-                      state.mealState.error?.message??''
-                      , onRetry:() {
-                        mealViewModel.doIntent(GetMealDetailsIntent(
-                            DynamicQueries(queriesData: [
-                              QueryData(key: 'i',value: mealId)
-                            ])
-                        ));
-                      },):const SizedBox()
-          ,
-        )),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: state.mealState.isLoading
+                ? const LoadingWidget()
+                : state.mealState.data != null
+                ? MealDetailsWidget(meal: state.mealState.data!)
+                : state.mealState.error != null
+                ? CustomErrorWidget(
+                    errorMessage: state.mealState.error?.message ?? '',
+                    onRetry: () {
+                      mealViewModel.doIntent(
+                        GetMealDetailsIntent(
+                          DynamicQueries(
+                            queriesData: [QueryData(key: 'i', value: mealId)],
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                : const SizedBox(),
+          ),
+        ),
       ),
     );
   }

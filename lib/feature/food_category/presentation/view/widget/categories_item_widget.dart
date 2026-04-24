@@ -16,11 +16,8 @@ class CategoriesItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal:10),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 12,
-        vertical: 4,
-      ),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: isSelected ? AppColors.primary : null,
@@ -30,7 +27,7 @@ class CategoriesItemWidget extends StatelessWidget {
           Text(
             itemName,
             style: AppTheme.lightTheme.textTheme.bodyMedium?.copyWith(
-              color:AppColors.white,
+              color: AppColors.white,
               fontWeight: FontWeight.bold,
               fontSize: 16,
             ),
