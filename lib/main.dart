@@ -29,7 +29,6 @@ void main() async {
       useOnlyLangCode: true,
       saveLocale: false,
       child: const FitnessApp(),
-
     ),
   );
 }

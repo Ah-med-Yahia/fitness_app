@@ -3,14 +3,10 @@ class MealsEntity {
 
   MealsEntity({this.meals});
 }
-class Meal{
+
+class Meal {
   final String? strMeal;
   final String? strMealThumb;
   final String? idMeal;
-  Meal({
-    this.strMeal,
-    this.strMealThumb,
-    this.idMeal,
-  });
+  Meal({this.strMeal, this.strMealThumb, this.idMeal});
 }
-

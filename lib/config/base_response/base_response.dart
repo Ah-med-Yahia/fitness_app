@@ -1,4 +1,3 @@
-
 import 'package:fitness_app/config/errors/app_exception.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,6 +11,7 @@ abstract class BaseResponse<T> with _$BaseResponse<T> {
 
   const factory BaseResponse.failure(AppException exception) = Failure<T>;
 }
+
 extension BaseStateMapper<T> on BaseResponse<T> {
   BaseState<T> toBaseState() {
     return when(
@@ -19,6 +19,4 @@ extension BaseStateMapper<T> on BaseResponse<T> {
       failure: (exception) => BaseState(error: exception),
     );
   }
-
 }
-

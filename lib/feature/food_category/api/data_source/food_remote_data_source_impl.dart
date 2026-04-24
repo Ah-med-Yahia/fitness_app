@@ -1,5 +1,3 @@
-
-
 import 'package:injectable/injectable.dart';
 
 import '../../../../config/base_response/base_response.dart';
@@ -10,8 +8,7 @@ import '../../data/model/meals_category_response.dart';
 import '../food_api_client/food_api_clients.dart';
 
 @Injectable(as: FoodRemoteDataSourceContract)
-class FoodCategoriesRemoteDataSourceImpl
-    extends FoodRemoteDataSourceContract {
+class FoodCategoriesRemoteDataSourceImpl extends FoodRemoteDataSourceContract {
   final FoodApiClient _foodApiClient;
 
   FoodCategoriesRemoteDataSourceImpl(this._foodApiClient);

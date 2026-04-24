@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 class DynamicQueries extends Equatable {
   final List<QueryData> queriesData;
 
@@ -8,7 +9,7 @@ class DynamicQueries extends Equatable {
     // استخدام Entries بيخلي الكود أنظف وبيجمع البيانات في خطوة واحدة
     return {
       for (var item in queriesData)
-        if (item.value != null) item.key: item.value
+        if (item.value != null) item.key: item.value,
     };
   }
 

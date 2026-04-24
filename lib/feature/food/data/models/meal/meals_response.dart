@@ -6,12 +6,10 @@ part 'meals_response.g.dart';
 
 @JsonSerializable()
 class MealsResponse {
-  @JsonKey(name: "meals")
+  @JsonKey(name: 'meals')
   final List<Meals>? meals;
 
-  MealsResponse ({
-    this.meals,
-  });
+  MealsResponse({this.meals});
 
   factory MealsResponse.fromJson(Map<String, dynamic> json) {
     return _$MealsResponseFromJson(json);
@@ -20,36 +18,26 @@ class MealsResponse {
   Map<String, dynamic> toJson() {
     return _$MealsResponseToJson(this);
   }
-  MealsEntity toEntity
-  () {
-    return MealsEntity(
-      meals: meals?.map((e) => e.toEntity()).toList(),
-    );
+
+  MealsEntity toEntity() {
+    return MealsEntity(meals: meals?.map((e) => e.toEntity()).toList());
   }
 }
 
-
 @JsonSerializable()
 class Meals {
-  @JsonKey(name: "strMeal")
+  @JsonKey(name: 'strMeal')
   final String? strMeal;
-  @JsonKey(name: "strMealThumb")
+  @JsonKey(name: 'strMealThumb')
   final String? strMealThumb;
-  @JsonKey(name: "idMeal")
+  @JsonKey(name: 'idMeal')
   final String? idMeal;
 
-  Meals ({
-    this.strMeal,
-    this.strMealThumb,
-    this.idMeal,
-  });
-Meal toEntity() {
-  return Meal(
-    strMeal: strMeal,
-    strMealThumb: strMealThumb,
-    idMeal: idMeal,
-  );
-}
+  Meals({this.strMeal, this.strMealThumb, this.idMeal});
+  Meal toEntity() {
+    return Meal(strMeal: strMeal, strMealThumb: strMealThumb, idMeal: idMeal);
+  }
+
   factory Meals.fromJson(Map<String, dynamic> json) {
     return _$MealsFromJson(json);
   }
@@ -58,5 +46,3 @@ Meal toEntity() {
     return _$MealsToJson(this);
   }
 }
-
-

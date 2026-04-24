@@ -18,8 +18,6 @@ import 'package:mockito/mockito.dart';
 
 import 'categories_view_model_test.mocks.dart';
 
-
-
 @GenerateMocks([GetAllFoodCategoriesUseCase, GetMealsUseCase])
 void main() {
   late GetAllFoodCategoriesUseCase allCategoriesUseCase;
@@ -32,26 +30,14 @@ void main() {
     allCategoriesUseCase = MockGetAllFoodCategoriesUseCase();
     mealsUseCase = MockGetMealsUseCase();
     categoriesEntity = const FoodCategoriesEntity(
-      categoriesEntity: [
-        FoodCategoryEntity(
-          id: '1',
-          title: 'seafood',
-        ),
-      ],
+      categoriesEntity: [FoodCategoryEntity(id: '1', title: 'seafood')],
     );
     mealsEntity = MealsEntity(
-      meals: [
-        Meal(
-          idMeal: '1',
-          strMeal: 'seafood',
-        ),
-      ],
+      meals: [Meal(idMeal: '1', strMeal: 'seafood')],
     );
     querymealRequest = const DynamicQueries(
-      queriesData: [
-        QueryData(
-          key: 'c',
-          value: 'seafood', )]);
+      queriesData: [QueryData(key: 'c', value: 'seafood')],
+    );
   });
   setUp(() {
     categoriesViewModel = CategoriesViewModel(
@@ -66,29 +52,29 @@ void main() {
         provideDummy<BaseResponse<FoodCategoriesEntity>>(
           Success(categoriesEntity),
         );
-        provideDummy<BaseResponse<MealsEntity>>(
-          Success(mealsEntity),
-        );
+        provideDummy<BaseResponse<MealsEntity>>(Success(mealsEntity));
         when(allCategoriesUseCase.invoke()).thenAnswer((realInvocation) {
           return Future.value(Success(categoriesEntity));
         });
-        when(mealsUseCase.invoke(querymealRequest)).thenAnswer(
-              (realInvocation) {
-            return Future.value(Success( mealsEntity));
-          },
-        );
+        when(mealsUseCase.invoke(querymealRequest)).thenAnswer((
+          realInvocation,
+        ) {
+          return Future.value(Success(mealsEntity));
+        });
       },
       build: () => categoriesViewModel,
       act: (bloc) {
         categoriesViewModel.doIntent(CategoriesAction(querymealRequest));
       },
       expect: () {
-        var state = const CategoriesState(
+        const state = CategoriesState(
           categoriesState: CategoryBaseState(),
           mealsCategoryState: BaseState(),
         );
         return [
-          state.copyWith(categoriesState: const CategoryBaseState(isLoading: true)),
+          state.copyWith(
+            categoriesState: const CategoryBaseState(isLoading: true),
+          ),
           state.copyWith(
             categoriesState: CategoryBaseState(
               isLoading: false,
@@ -109,10 +95,7 @@ void main() {
               isLoading: false,
               data: categoriesEntity,
             ),
-            mealsCategoryState: BaseState(
-              isLoading: false,
-              data: mealsEntity,
-            ),
+            mealsCategoryState: BaseState(isLoading: false, data: mealsEntity),
             clearError: true,
           ),
         ];
@@ -135,12 +118,14 @@ void main() {
         categoriesViewModel.doIntent(CategoriesAction(querymealRequest));
       },
       expect: () {
-        var state = const CategoriesState(
+        const state = CategoriesState(
           categoriesState: CategoryBaseState(),
           mealsCategoryState: BaseState(),
         );
         return [
-          state.copyWith(categoriesState: const CategoryBaseState(isLoading: true)),
+          state.copyWith(
+            categoriesState: const CategoryBaseState(isLoading: true),
+          ),
           state.copyWith(
             categoriesState: CategoryBaseState(
               isLoading: false,
@@ -154,30 +139,31 @@ void main() {
       'when calling dointent with categories action with success and error in get products it should emit correct state',
       setUp: () {
         provideDummy<BaseResponse<FoodCategoriesEntity>>(
-          Success( categoriesEntity),
+          Success(categoriesEntity),
         );
-        provideDummy<BaseResponse<MealsEntity>>(
-            Failure(ApiException('error'))
-        );
+        provideDummy<BaseResponse<MealsEntity>>(Failure(ApiException('error')));
         when(allCategoriesUseCase.invoke()).thenAnswer((realInvocation) {
           return Future.value(Success(categoriesEntity));
         });
-        when(mealsUseCase.invoke(querymealRequest)).thenAnswer(
-              (realInvocation) {
-            return Future.value(Failure(ApiException('error')));
-          },
-        );
+        when(mealsUseCase.invoke(querymealRequest)).thenAnswer((
+          realInvocation,
+        ) {
+          return Future.value(Failure(ApiException('error')));
+        });
       },
       build: () => categoriesViewModel,
       act: (bloc) {
         categoriesViewModel.doIntent(CategoriesAction(querymealRequest));
       },
       expect: () {
-        var state = const CategoriesState(
-          categoriesState: CategoryBaseState(), mealsCategoryState: BaseState(),
+        const state = CategoriesState(
+          categoriesState: CategoryBaseState(),
+          mealsCategoryState: BaseState(),
         );
         return [
-          state.copyWith(categoriesState: const CategoryBaseState(isLoading: true)),
+          state.copyWith(
+            categoriesState: const CategoryBaseState(isLoading: true),
+          ),
           state.copyWith(
             categoriesState: CategoryBaseState(
               isLoading: false,
@@ -212,24 +198,22 @@ void main() {
     blocTest(
       'when calling dointent with get category with success in get products intent it should emit correct state',
       setUp: () {
-        provideDummy<BaseResponse<MealsEntity>>(
-          Success(mealsEntity),
-        );
+        provideDummy<BaseResponse<MealsEntity>>(Success(mealsEntity));
 
-        when(mealsUseCase.invoke(querymealRequest)).thenAnswer(
-              (realInvocation) {
-            return Future.value(Success( mealsEntity));
-          },
-        );
+        when(mealsUseCase.invoke(querymealRequest)).thenAnswer((
+          realInvocation,
+        ) {
+          return Future.value(Success(mealsEntity));
+        });
       },
       build: () => categoriesViewModel,
       act: (bloc) {
-        categoriesViewModel.doIntent(GetCategoryIntent(
-            querymealRequest,
-            index: 0));
+        categoriesViewModel.doIntent(
+          GetCategoryIntent(querymealRequest, index: 0),
+        );
       },
       expect: () {
-        var state = categoriesViewModel.baseState;
+        final state = categoriesViewModel.baseState;
         return [
           state.copyWith(categoriesState: const CategoryBaseState(index: 0)),
           state.copyWith(
@@ -238,10 +222,7 @@ void main() {
             clearError: true,
           ),
           state.copyWith(
-            mealsCategoryState: BaseState(
-              isLoading: false,
-              data: mealsEntity,
-            ),
+            mealsCategoryState: BaseState(isLoading: false, data: mealsEntity),
             clearError: true,
           ),
         ];
@@ -250,28 +231,26 @@ void main() {
     blocTest(
       'when calling dointent with get category with error in get products intent it should emit correct state',
       setUp: () {
-        provideDummy<BaseResponse<MealsEntity>>(
-            Failure(ApiException('error')),
-        );
+        provideDummy<BaseResponse<MealsEntity>>(Failure(ApiException('error')));
 
-        when(mealsUseCase.invoke(querymealRequest)).thenAnswer(
-              (realInvocation) {
-            return Future.value(Failure(ApiException('error')));
-          },
-        );
+        when(mealsUseCase.invoke(querymealRequest)).thenAnswer((
+          realInvocation,
+        ) {
+          return Future.value(Failure(ApiException('error')));
+        });
       },
       build: () => categoriesViewModel,
       act: (bloc) {
-        categoriesViewModel.doIntent(GetCategoryIntent(
-            querymealRequest,
-            index: 0));
+        categoriesViewModel.doIntent(
+          GetCategoryIntent(querymealRequest, index: 0),
+        );
       },
       expect: () {
-        var state = categoriesViewModel.baseState;
+        final state = categoriesViewModel.baseState;
         return [
           state.copyWith(categoriesState: const CategoryBaseState(index: 0)),
           state.copyWith(
-          mealsCategoryState: const BaseState(isLoading: true),
+            mealsCategoryState: const BaseState(isLoading: true),
             clearSuccess: true,
             clearError: true,
           ),
@@ -290,23 +269,21 @@ void main() {
     blocTest(
       'when calling dointent with get products category with success  it should emit correct state',
       setUp: () {
-        provideDummy<BaseResponse<MealsEntity>>(
-          Success( mealsEntity),
-        );
-        when(mealsUseCase.invoke(querymealRequest)).thenAnswer(
-              (realInvocation) {
-            return Future.value(Success( mealsEntity));
-          },
-        );
+        provideDummy<BaseResponse<MealsEntity>>(Success(mealsEntity));
+        when(mealsUseCase.invoke(querymealRequest)).thenAnswer((
+          realInvocation,
+        ) {
+          return Future.value(Success(mealsEntity));
+        });
       },
       build: () => categoriesViewModel,
       act: (bloc) {
         categoriesViewModel.doIntent(
-          GetProductsCategoryIntent( querymealRequest),
+          GetProductsCategoryIntent(querymealRequest),
         );
       },
       expect: () {
-        var state = categoriesViewModel.baseState;
+        final state = categoriesViewModel.baseState;
         return [
           state.copyWith(
             mealsCategoryState: const BaseState(isLoading: true),
@@ -314,10 +291,7 @@ void main() {
             clearError: true,
           ),
           state.copyWith(
-            mealsCategoryState: BaseState(
-              isLoading: false,
-              data: mealsEntity,
-            ),
+            mealsCategoryState: BaseState(isLoading: false, data: mealsEntity),
             clearError: true,
           ),
         ];
@@ -326,23 +300,21 @@ void main() {
     blocTest(
       'when calling dointent with get products category with error  it should emit correct state',
       setUp: () {
-        provideDummy<BaseResponse<MealsEntity>>(
-          Failure(ApiException('error')),
-        );
-        when(mealsUseCase.invoke(querymealRequest)).thenAnswer(
-              (realInvocation) {
-            return Future.value(Failure(ApiException('error')));
-          },
-        );
+        provideDummy<BaseResponse<MealsEntity>>(Failure(ApiException('error')));
+        when(mealsUseCase.invoke(querymealRequest)).thenAnswer((
+          realInvocation,
+        ) {
+          return Future.value(Failure(ApiException('error')));
+        });
       },
       build: () => categoriesViewModel,
       act: (bloc) {
         categoriesViewModel.doIntent(
-          GetProductsCategoryIntent( querymealRequest),
+          GetProductsCategoryIntent(querymealRequest),
         );
       },
       expect: () {
-        var state = categoriesViewModel.baseState;
+        final state = categoriesViewModel.baseState;
         return [
           state.copyWith(
             mealsCategoryState: const BaseState(isLoading: true),
@@ -360,5 +332,4 @@ void main() {
       },
     );
   });
-
 }

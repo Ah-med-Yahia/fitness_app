@@ -10,19 +10,20 @@ import 'state/login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   final LoginUseCase _loginUseCase;
 
-
-  LoginCubit(this._loginUseCase)
-      : super(const LoginState.initial());
+  LoginCubit(this._loginUseCase) : super(const LoginState.initial());
 
   Future<void> _login({required String email, required String password}) async {
     emit(const LoginState.loading());
 
     final entity = await _loginUseCase(email: email, password: password);
-    entity.when(success: (data) {
-      emit(LoginState.success(message: data));
-    }, failure: (exception) {
-      emit(LoginState.failure(message: exception.message));
-    });
+    entity.when(
+      success: (data) {
+        emit(LoginState.success(message: data));
+      },
+      failure: (exception) {
+        emit(LoginState.failure(message: exception.message));
+      },
+    );
   }
 
   void doIntent(LoginIntent intent) {
@@ -32,4 +33,3 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 }
-

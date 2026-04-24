@@ -1,3 +1,4 @@
+import 'package:fitness_app/app/core/gen/assets.gen.dart';
 import 'package:fitness_app/config/di/di.dart';
 
 import 'package:fitness_app/core/routing/app_routes_constant.dart';
@@ -11,8 +12,6 @@ import 'package:fitness_app/features/auth/forget_password/presentation/screens/v
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../../../app/core/gen/assets.gen.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});

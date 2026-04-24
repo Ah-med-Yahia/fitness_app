@@ -8,36 +8,39 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'meal_repo_impl_test.mocks.dart';
+
 @GenerateMocks([MealRemoteDataSourceImpl])
 void main() {
   late MealRemoteDataSourceImpl remoteDataSourceImpl;
   late MealRepoImpl repoImpl;
-late MealDetailsResponse mealDetailsResponse;
+  late MealDetailsResponse mealDetailsResponse;
   late DynamicQueries queryMealRequest;
   setUpAll(() {
-    remoteDataSourceImpl=MockMealRemoteDataSourceImpl();
-    repoImpl=MealRepoImpl(remoteDataSourceImpl);
-    mealDetailsResponse=MealDetailsResponse(
-        meals: [
-          MealDto(
-              strCategory: 'seafood'
-          )
-        ]
+    remoteDataSourceImpl = MockMealRemoteDataSourceImpl();
+    repoImpl = MealRepoImpl(remoteDataSourceImpl);
+    mealDetailsResponse = MealDetailsResponse(
+      meals: [MealDto(strCategory: 'seafood')],
     );
-    queryMealRequest=const DynamicQueries(queriesData:
-    [QueryData(key: 'c',value: 'seafood')]
+    queryMealRequest = const DynamicQueries(
+      queriesData: [QueryData(key: 'c', value: 'seafood')],
     );
-  },);
+  });
   test('test for meal repo ', () {
     provideDummy<BaseResponse<MealsResponse>>(Success(MealsResponse()));
-    when(remoteDataSourceImpl.getMeals(queryMealRequest)).thenAnswer((_) async => Success(MealsResponse()));
+    when(
+      remoteDataSourceImpl.getMeals(queryMealRequest),
+    ).thenAnswer((_) async => Success(MealsResponse()));
     repoImpl.getMeals(queryMealRequest);
     verify(remoteDataSourceImpl.getMeals(queryMealRequest));
-  },);
+  });
   test('when call get meal details it must get data from data source ', () {
-    provideDummy<BaseResponse<MealDetailsResponse>>(Success(mealDetailsResponse));
-    when(remoteDataSourceImpl.getMealDetails(queryMealRequest)).thenAnswer((_) async => Success(mealDetailsResponse));
+    provideDummy<BaseResponse<MealDetailsResponse>>(
+      Success(mealDetailsResponse),
+    );
+    when(
+      remoteDataSourceImpl.getMealDetails(queryMealRequest),
+    ).thenAnswer((_) async => Success(mealDetailsResponse));
     repoImpl.getMealDetails(queryMealRequest);
     verify(remoteDataSourceImpl.getMealDetails(queryMealRequest));
-  },);
+  });
 }

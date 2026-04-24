@@ -8,22 +8,19 @@ import 'package:mockito/mockito.dart';
 
 import 'get_all_food_use_case_test.mocks.dart';
 
-
-
 @GenerateMocks([FoodCategoriesRepositoryImpl])
 void main() {
   test('when calling get all categories it call data source', () async {
     final FoodCategoriesRepositoryImpl categoriesRepoImpl =
-    MockFoodCategoriesRepositoryImpl();
-    final GetAllFoodCategoriesUseCase getAllCategoriesUseCase = GetAllFoodCategoriesUseCase(categoriesRepoImpl);
-const FoodCategoriesEntity entity=FoodCategoriesEntity();
-    provideDummy<BaseResponse<FoodCategoriesEntity>>(
-      const Success(entity),
-    );
+        MockFoodCategoriesRepositoryImpl();
+    final GetAllFoodCategoriesUseCase getAllCategoriesUseCase =
+        GetAllFoodCategoriesUseCase(categoriesRepoImpl);
+    const FoodCategoriesEntity entity = FoodCategoriesEntity();
+    provideDummy<BaseResponse<FoodCategoriesEntity>>(const Success(entity));
     when(
       categoriesRepoImpl.getAllCategories(),
     ).thenAnswer((_) async => const Success(entity));
-    var result = await getAllCategoriesUseCase.invoke();
+    final result = await getAllCategoriesUseCase.invoke();
     expect(result, isA<Success<FoodCategoriesEntity>>());
     verify(categoriesRepoImpl.getAllCategories());
   });

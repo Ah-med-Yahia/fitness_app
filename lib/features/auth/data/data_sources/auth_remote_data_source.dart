@@ -5,5 +5,3 @@ import '../models/login_response_model.dart';
 abstract class AuthRemoteDataSource {
   Future<BaseResponse<LoginResponseModel>> login(LoginRequestModel request);
 }
-
-

@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import '../../../../config/base_state/base_state.dart';
 import '../../../food/domain/models/meals_entity.dart';
 import '../../domain/model/food_entity.dart';
+
 class CategoriesState extends Equatable {
   final CategoryBaseState categoriesState;
   final BaseState<MealsEntity> mealsCategoryState;
@@ -24,27 +25,23 @@ class CategoriesState extends Equatable {
       ),
       mealsCategoryState: BaseState(
         isLoading:
-            mealsCategoryState?.isLoading ??
-            this.mealsCategoryState.isLoading,
+            mealsCategoryState?.isLoading ?? this.mealsCategoryState.isLoading,
         data: clearSuccess
             ? null
-            : (mealsCategoryState?.data ??
-                  this.mealsCategoryState.data),
+            : (mealsCategoryState?.data ?? this.mealsCategoryState.data),
         error: clearError
             ? null
-            : (mealsCategoryState?.error ??
-                  this.mealsCategoryState.error),
+            : (mealsCategoryState?.error ?? this.mealsCategoryState.error),
       ),
     );
   }
 
   @override
-  List<Object?> get props => [categoriesState,mealsCategoryState];
-
-
+  List<Object?> get props => [categoriesState, mealsCategoryState];
 }
 
-class CategoryBaseState extends BaseState<FoodCategoriesEntity> with EquatableMixin {
+class CategoryBaseState extends BaseState<FoodCategoriesEntity>
+    with EquatableMixin {
   const CategoryBaseState({
     this.index = 0,
     super.isLoading,

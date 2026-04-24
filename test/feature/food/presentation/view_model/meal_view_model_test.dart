@@ -12,57 +12,60 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'meal_view_model_test.mocks.dart';
+
 @GenerateMocks([GetMealDetailsUseCase])
 void main() {
-  late GetMealDetailsUseCase _useCase;
-  late MealViewModel _viewModel;
-  late MealDetailsResponse _response;
-  late DynamicQueries _request;
+  late GetMealDetailsUseCase useCase;
+  late MealViewModel viewModel;
+  late MealDetailsResponse response;
+  late DynamicQueries request;
   setUpAll(() {
-    _useCase=MockGetMealDetailsUseCase();
-    _response=MealDetailsResponse();
-    _request=const DynamicQueries(queriesData: [
-      QueryData(key: 'i',value: 'kofta')
-    ]);
-  },);
+    useCase = MockGetMealDetailsUseCase();
+    response = MealDetailsResponse();
+    request = const DynamicQueries(
+      queriesData: [QueryData(key: 'i', value: 'kofta')],
+    );
+  });
   setUp(() {
-    _viewModel=MealViewModel(_useCase);
-  },);
- blocTest('test for do intent get meal deatails intent with success',
-   setUp: () {
-     provideDummy<BaseResponse<MealDetailsResponse>>(Success(_response));
-     when(_useCase.invoke(_request)).thenAnswer((_) => Future.value(Success(_response),));
-   },
-   build: () =>_viewModel ,
- act: (bloc) =>bloc.doIntent(GetMealDetailsIntent(_request)),
-   expect: () {
-     var state=const MealState(mealState: BaseState());
-     return [
-       state.copyWith(
-         mealState: const BaseState(isLoading: true)
-       ),
-       state.copyWith(mealState: BaseState(
-         isLoading: false,data: _response
-       ))
-     ];
-   },
- );
-  blocTest('test for do intent get meal details intent with failure',
+    viewModel = MealViewModel(useCase);
+  });
+  blocTest(
+    'test for do intent get meal deatails intent with success',
     setUp: () {
-      provideDummy<BaseResponse<MealDetailsResponse>>(Failure(ApiException('error')));
-      when(_useCase.invoke(_request)).thenAnswer((_) => Future.value(Failure(ApiException('error'))));
+      provideDummy<BaseResponse<MealDetailsResponse>>(Success(response));
+      when(
+        useCase.invoke(request),
+      ).thenAnswer((_) => Future.value(Success(response)));
     },
-    build: () =>_viewModel ,
-    act: (bloc) =>bloc.doIntent(GetMealDetailsIntent(_request)),
+    build: () => viewModel,
+    act: (bloc) => bloc.doIntent(GetMealDetailsIntent(request)),
     expect: () {
-      var state=const MealState(mealState: BaseState());
+      const state = MealState(mealState: BaseState());
       return [
+        state.copyWith(mealState: const BaseState(isLoading: true)),
+        state.copyWith(mealState: BaseState(isLoading: false, data: response)),
+      ];
+    },
+  );
+  blocTest(
+    'test for do intent get meal details intent with failure',
+    setUp: () {
+      provideDummy<BaseResponse<MealDetailsResponse>>(
+        Failure(ApiException('error')),
+      );
+      when(
+        useCase.invoke(request),
+      ).thenAnswer((_) => Future.value(Failure(ApiException('error'))));
+    },
+    build: () => viewModel,
+    act: (bloc) => bloc.doIntent(GetMealDetailsIntent(request)),
+    expect: () {
+      const state = MealState(mealState: BaseState());
+      return [
+        state.copyWith(mealState: const BaseState(isLoading: true)),
         state.copyWith(
-            mealState: const BaseState(isLoading: true)
+          mealState: BaseState(isLoading: false, error: ApiException('error')),
         ),
-        state.copyWith(mealState: BaseState(
-            isLoading: false,error: ApiException('error')
-        ))
       ];
     },
   );

@@ -6,7 +6,6 @@ import 'package:fitness_app/core/constants/api_constants.dart';
 import '../../data/models/login_request_model.dart';
 import '../../data/models/login_response_model.dart';
 
-
 part 'auth_api_service.g.dart';
 
 @injectable
