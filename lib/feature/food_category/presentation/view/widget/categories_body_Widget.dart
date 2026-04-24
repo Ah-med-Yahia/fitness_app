@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fitness_app/feature/food_category/presentation/view/widget/meal_cart_item.dart';
 import 'package:flutter/material.dart';
+import '../../../../../core/request/query_request.dart';
 import '../../../../../core/reusable_widgets/custom_error_widget.dart';
 import '../../../../../core/reusable_widgets/loading_widget.dart';
 import '../../../../../core/theme/app_colors.dart';
@@ -40,7 +41,14 @@ class CategoriesBodyWidget extends StatelessWidget {
                         child: TabBar(
                     onTap: (value) {
                       categoriesViewModel.doIntent(
-                        GetCategoryIntent(index: value),
+                        GetCategoryIntent(
+                           DynamicQueries(queriesData: [
+                             QueryData(key: 'c',
+                                 value: '${state.categoriesState.data?.categoriesEntity?[
+                               state.categoriesState.index
+                             ].title}')
+                           ]),
+                            index: value),
                       );
                     },
                     padding: EdgeInsets.zero,
@@ -74,7 +82,13 @@ class CategoriesBodyWidget extends StatelessWidget {
               ? CustomErrorWidget(
                   errorMessage: state.categoriesState.error?.message??'',
                   onRetry: () {
-                    categoriesViewModel.doIntent(CategoriesAction());
+                    categoriesViewModel.doIntent(CategoriesAction(
+                        DynamicQueries(queriesData: [
+                          QueryData(key: 'c',value: '${state.categoriesState.data?.categoriesEntity?[
+                            state.categoriesState.index
+                          ].title}')
+                        ])
+                    ));
                   },
                 )
               : Container(),
@@ -121,13 +135,16 @@ class CategoriesBodyWidget extends StatelessWidget {
                   onRetry: () {
                     categoriesViewModel.doIntent(
                       GetProductsCategoryIntent(
-                        categoryId:
-                            state
-                                .categoriesState
-                                .data
-                                ?.categoriesEntity?[state.categoriesState.index]
-                                .id ??
-                            '',
+                        DynamicQueries(queriesData: [
+                          QueryData(key: 'c',value: '${state.categoriesState.data?.categoriesEntity?[state.categoriesState.index].id}')
+                        ])
+                        // categoryId:
+                        //     state
+                        //         .categoriesState
+                        //         .data
+                        //         ?.categoriesEntity?[state.categoriesState.index]
+                        //         .id ??
+                        //     '',
                       ),
                     );
                   },

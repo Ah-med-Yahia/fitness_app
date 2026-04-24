@@ -38,6 +38,7 @@ dependencies:
   flutter_launcher_icons: ^0.14.4
   chucker_flutter: ^1.9.1
   dart_mappable: ^4.2.0
+  youtube_player_iframe: ^5.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

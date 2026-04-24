@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../config/di/di.dart';
 
 
+import '../../../../core/request/query_request.dart';
 import '../view_model/categories_intent.dart';
 import '../view_model/categories_state.dart';
 import '../view_model/categories_view_model.dart';
@@ -27,7 +28,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CategoriesViewModel, CategoriesState>(
-      bloc: categoriesViewModel..doIntent(CategoriesAction()),
+      bloc: categoriesViewModel..doIntent(CategoriesAction(
+        DynamicQueries(queriesData: [
+          QueryData(key: 'c',value: '${categoriesViewModel.state.categoriesState.data?.categoriesEntity?[0].title}')
+        ])
+      )),
       builder: (context, state) {
 
         return SafeArea(

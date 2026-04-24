@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:fitness_app/feature/food/domain/use_cases/get_meals_use_case.dart';
 import 'package:injectable/injectable.dart';
@@ -7,7 +7,8 @@ import '../../../../config/base_response/base_response.dart';
 import '../../../../config/base_state/base_state.dart';
 
 import '../../../../config/services/custom_cubit.dart';
-import '../../../food/domain/request/query_meal_request.dart';
+import '../../../../core/request/query_request.dart';
+
 import '../../domain/use_case/get_all_food_use_case.dart';
 import 'categories_event.dart';
 import 'categories_intent.dart';
@@ -53,7 +54,11 @@ class CategoriesViewModel
       if (state.categoriesState.data?.categoriesEntity?.isNotEmpty ??
               false) {
             _getMealsCategory(
-              '${state.categoriesState.data?.categoriesEntity?[0].title}',
+                //query
+              DynamicQueries(queriesData: [
+                QueryData(key: 'c',value: '${state.categoriesState.data?.categoriesEntity?[0].title}')
+              ])
+             // '${state.categoriesState.data?.categoriesEntity?[0].title}',
           );
           }
     },
@@ -74,7 +79,7 @@ class CategoriesViewModel
 
   }
 
-  void _getCategory({int? index,}) {
+  void _getCategory({int? index,required DynamicQueries query}) {
     if (index != null) {
       baseState = state.copyWith(
         categoriesState: CategoryBaseState(index: index),
@@ -83,11 +88,19 @@ class CategoriesViewModel
 
     }
     _getMealsCategory(
-        '${baseState.categoriesState.data?.categoriesEntity?[baseState
-            .categoriesState.index].title}',);
+     query
+     //  DynamicQueries(queriesData: [
+     //    QueryData(key: 'c',value: '${baseState.categoriesState.data?.categoriesEntity?[
+     //      baseState.categoriesState.index
+     //    ].title}')
+     //  ])
+        // '${baseState.categoriesState.data?.categoriesEntity?[baseState
+        //     .categoriesState.index].title}',
+
+    );
   }
 
-  Future<void> _getMealsCategory(String categoryId) async {
+  Future<void> _getMealsCategory(DynamicQueries query) async {
     emit(
       state.copyWith(
         mealsCategoryState: const BaseState(isLoading: true),
@@ -96,8 +109,12 @@ class CategoriesViewModel
       ),
     );
     final response = await _mealsCategoryUseCase.invoke(
-      QueryMealRequest(category: categoryId),
-    );
+      query,
+      //  QueryRequest(queryKey:'c',queryValue: categoryId),
+    //   DynamicQueries(queriesData: [
+    //     QueryData(key: 'c', value: categoryId),
+    //   ]),
+     );
     response.when(success: (data) {
       emit(
         state.copyWith(
@@ -128,10 +145,10 @@ class CategoriesViewModel
         _getAllCategories();
         break;
       case GetCategoryIntent():
-        _getCategory(index: intent.index);
+        _getCategory(index: intent.index,query: intent.query);
         break;
       case GetProductsCategoryIntent():
-        _getMealsCategory(intent.categoryId);
+        _getMealsCategory(intent.query);
         break;
 
     }

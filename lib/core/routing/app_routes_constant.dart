@@ -5,4 +5,5 @@ abstract class AppRoutesConstants {
   static const String homeRoute = '/home';
   static const String forgetPasswordRoute = '/forgetPassword';
   static const String foodCategoryRoute = '/';
+  static const String foodDetailsRoute = '/food_details';
 }

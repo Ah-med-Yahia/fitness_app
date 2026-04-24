@@ -2,9 +2,10 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:fitness_app/config/base_response/base_response.dart';
 import 'package:fitness_app/config/base_state/base_state.dart';
 import 'package:fitness_app/config/errors/api_exception.dart';
+import 'package:fitness_app/core/request/query_request.dart';
 
 import 'package:fitness_app/feature/food/domain/models/meals_entity.dart';
-import 'package:fitness_app/feature/food/domain/request/query_meal_request.dart';
+
 import 'package:fitness_app/feature/food/domain/use_cases/get_meals_use_case.dart';
 import 'package:fitness_app/feature/food_category/domain/model/food_entity.dart';
 import 'package:fitness_app/feature/food_category/domain/use_case/get_all_food_use_case.dart';
@@ -26,7 +27,7 @@ void main() {
   late CategoriesViewModel categoriesViewModel;
   late FoodCategoriesEntity categoriesEntity;
   late MealsEntity mealsEntity;
-  late QueryMealRequest querymealRequest;
+  late DynamicQueries querymealRequest;
   setUpAll(() {
     allCategoriesUseCase = MockGetAllFoodCategoriesUseCase();
     mealsUseCase = MockGetMealsUseCase();
@@ -46,7 +47,11 @@ void main() {
         ),
       ],
     );
-    querymealRequest = const QueryMealRequest(category: 'seafood');
+    querymealRequest = const DynamicQueries(
+      queriesData: [
+        QueryData(
+          key: 'c',
+          value: 'seafood', )]);
   });
   setUp(() {
     categoriesViewModel = CategoriesViewModel(
@@ -75,7 +80,7 @@ void main() {
       },
       build: () => categoriesViewModel,
       act: (bloc) {
-        categoriesViewModel.doIntent(CategoriesAction());
+        categoriesViewModel.doIntent(CategoriesAction(querymealRequest));
       },
       expect: () {
         var state = const CategoriesState(
@@ -127,7 +132,7 @@ void main() {
       },
       build: () => categoriesViewModel,
       act: (bloc) {
-        categoriesViewModel.doIntent(CategoriesAction());
+        categoriesViewModel.doIntent(CategoriesAction(querymealRequest));
       },
       expect: () {
         var state = const CategoriesState(
@@ -165,7 +170,7 @@ void main() {
       },
       build: () => categoriesViewModel,
       act: (bloc) {
-        categoriesViewModel.doIntent(CategoriesAction());
+        categoriesViewModel.doIntent(CategoriesAction(querymealRequest));
       },
       expect: () {
         var state = const CategoriesState(
@@ -219,7 +224,9 @@ void main() {
       },
       build: () => categoriesViewModel,
       act: (bloc) {
-        categoriesViewModel.doIntent(GetCategoryIntent(index: 0));
+        categoriesViewModel.doIntent(GetCategoryIntent(
+            querymealRequest,
+            index: 0));
       },
       expect: () {
         var state = categoriesViewModel.baseState;
@@ -255,7 +262,9 @@ void main() {
       },
       build: () => categoriesViewModel,
       act: (bloc) {
-        categoriesViewModel.doIntent(GetCategoryIntent(index: 0));
+        categoriesViewModel.doIntent(GetCategoryIntent(
+            querymealRequest,
+            index: 0));
       },
       expect: () {
         var state = categoriesViewModel.baseState;
@@ -293,7 +302,7 @@ void main() {
       build: () => categoriesViewModel,
       act: (bloc) {
         categoriesViewModel.doIntent(
-          GetProductsCategoryIntent(categoryId: '1'),
+          GetProductsCategoryIntent( querymealRequest),
         );
       },
       expect: () {
@@ -329,7 +338,7 @@ void main() {
       build: () => categoriesViewModel,
       act: (bloc) {
         categoriesViewModel.doIntent(
-          GetProductsCategoryIntent(categoryId: '1'),
+          GetProductsCategoryIntent( querymealRequest),
         );
       },
       expect: () {

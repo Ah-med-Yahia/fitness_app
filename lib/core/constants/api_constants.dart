@@ -15,4 +15,5 @@ class ApiConstants {
   static const String forgotPasswordEndpoint = 'auth/forgotPassword';
   static const String verifyResetCodeEndpoint = 'auth/verifyResetCode';
   static const String resetPasswordEndpoint = 'auth/resetPassword';
+  static const String mealDetails = '1/lookup.php';
 }
