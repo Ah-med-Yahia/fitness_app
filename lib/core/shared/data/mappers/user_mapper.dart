@@ -1,5 +1,5 @@
 import 'package:fitness_app/core/shared/data/models/user_model.dart';
-import 'package:fitness_app/core/shared/domain/user_entity.dart';
+import 'package:fitness_app/core/shared/domain/entities/user_entity.dart';
 
 extension UserMapper on UserModel {
   UserEntity toEntity() {

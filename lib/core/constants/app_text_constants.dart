@@ -11,6 +11,18 @@ class AppTextConstants {
   static String get cancel => 'common.cancel'.tr();
   static String get confirm => 'common.confirm'.tr();
   static String get done => 'common.done'.tr();
+  static String get next => 'common.next'.tr();
+  static String get back => 'common.back'.tr();
+
+  //OnBoarding
+  static String get skip => 'onBoarding.skip'.tr();
+  static String get page1Title => 'onBoarding.page1Title'.tr();
+  static String get page1Description => 'onBoarding.page1Description'.tr();
+  static String get page2Title => 'onBoarding.page2Title'.tr();
+  static String get page2Description => 'onBoarding.page2Description'.tr();
+  static String get page3Title => 'onBoarding.page3Title'.tr();
+  static String get page3Description => 'onBoarding.page3Description'.tr();
+  static String get doIt => 'onBoarding.doIt'.tr();
 
   // Auth
   static String get email => 'auth.email'.tr();
