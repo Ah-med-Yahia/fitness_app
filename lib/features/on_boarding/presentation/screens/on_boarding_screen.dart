@@ -38,9 +38,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             backGroundColor: AppColors.red,
             textColor: AppColors.white,
           );
+        case NavigateToLoginSideEffect():
+          _navigateToLogin();
       }
     });
     super.initState();
+  }
+
+  void _navigateToLogin() {
+    context.pushReplacementNamed(AppRoutesConstants.signInRoute);
   }
 
   @override
@@ -138,9 +144,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           OnBoardingPageView3(
                             onPressedBack: _previousPage,
                             onPressedNext: () {
-                              context.pushReplacementNamed(
-                                AppRoutesConstants.forgetPasswordRoute,
-                              );
+                              onBoardingCubit.doIntent(NavigateToLoginIntent());
                             },
                             onDotTap: _onDotTap,
                           ),

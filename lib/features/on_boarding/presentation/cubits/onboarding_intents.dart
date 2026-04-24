@@ -5,4 +5,4 @@ class UpdateCurrentPageIntent extends OnboardingIntents {
   UpdateCurrentPageIntent(this.page);
 }
 
-class NavigateToRegisterIntent extends OnboardingIntents {}
+class NavigateToLoginIntent extends OnboardingIntents {}
