@@ -1,4 +1,3 @@
-
 import 'package:fitness_app/features/auth/presentation/view_model/login_cubit.dart';
 import 'package:fitness_app/config/di/di.dart';
 import 'package:fitness_app/core/routing/app_routes_constant.dart';

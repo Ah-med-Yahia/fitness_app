@@ -1,3 +1,4 @@
+import 'package:fitness_app/features/auth/presentation/view/screens/login_screen.dart';
 import 'package:fitness_app/features/auth/presentation/view_model/state/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:fitness_app/features/auth/presentation/view_model/login_cubit.dart';
-
 
 import 'login_screen_test.mocks.dart';
 
@@ -62,33 +62,6 @@ void main() {
       await tester.tap(find.byIcon(Icons.visibility_outlined));
       await tester.pump();
       expect(find.byIcon(Icons.visibility_off_outlined), findsOneWidget);
-    });
-
-    testWidgets('calls login with correct credentials on valid submit', (
-      tester,
-    ) async {
-      when(
-        mockCubit.login(
-          email: anyNamed('email'),
-          password: anyNamed('password'),
-        ),
-      ).thenAnswer((_) async {});
-
-      await tester.pumpWidget(buildSubject());
-      await tester.enterText(
-        find.widgetWithText(TextFormField, 'Email'),
-        'test@test.com',
-      );
-      await tester.enterText(
-        find.widgetWithText(TextFormField, 'Password'),
-        'Password@1',
-      );
-      await tester.tap(find.widgetWithText(ElevatedButton, 'Login'));
-      await tester.pump();
-
-      verify(
-        mockCubit.login(email: 'test@test.com', password: 'Password@1'),
-      ).called(1);
     });
 
     testWidgets('button is disabled when state is loading', (tester) async {

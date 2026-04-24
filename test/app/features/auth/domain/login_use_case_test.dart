@@ -2,7 +2,6 @@ import 'package:fitness_app/config/base_response/base_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:fitness_app/features/auth/domain/entities/login_entity.dart';
 import 'package:fitness_app/features/auth/domain/repository/auth_repository.dart';
 import 'package:fitness_app/features/auth/domain/use_cases/login_use_case.dart';
 

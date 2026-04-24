@@ -1,3 +1,4 @@
+import 'package:fitness_app/app/core/gen/assets.gen.dart';
 import 'package:fitness_app/config/di/di.dart';
 
 import 'package:fitness_app/core/routing/app_routes_constant.dart';

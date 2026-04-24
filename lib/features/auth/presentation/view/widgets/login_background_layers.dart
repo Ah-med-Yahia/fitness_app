@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-
+import 'package:fitness_app/app/core/gen/assets.gen.dart';
 import 'package:fitness_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 

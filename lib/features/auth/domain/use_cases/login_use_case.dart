@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import '../../../../config/base_response/base_response.dart';
-import '../entities/login_entity.dart';
 import '../repository/auth_repository.dart';
 
 @injectable
@@ -9,6 +8,8 @@ class LoginUseCase {
 
   const LoginUseCase(this._repository);
 
-  Future<BaseResponse<String>> call({required String email, required String password}) =>
-      _repository.login(email: email, password: password);
+  Future<BaseResponse<String>> call({
+    required String email,
+    required String password,
+  }) => _repository.login(email: email, password: password);
 }
