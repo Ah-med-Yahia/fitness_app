@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:fitness_app/app/core/routing/app_router.dart';
-import 'package:fitness_app/app/core/theme/app_theme.dart';
+
 import 'package:flutter/material.dart';
+
+import 'core/routing/app_router.dart';
+import 'core/theme/app_theme.dart';
 
 class FitnessApp extends StatelessWidget {
   const FitnessApp({super.key});

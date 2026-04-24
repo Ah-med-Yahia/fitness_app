@@ -1,12 +1,12 @@
+import 'package:fitness_app/features/auth/presentation/view_model/state/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:fitness_app/app/features/auth/presentation/view_model/login_cubit.dart';
-import 'package:fitness_app/app/features/auth/presentation/states/login_state.dart';
-import 'package:fitness_app/app/features/auth/presentation/screens/login_screen.dart';
+import 'package:fitness_app/features/auth/presentation/view_model/login_cubit.dart';
+
 
 import 'login_screen_test.mocks.dart';
 

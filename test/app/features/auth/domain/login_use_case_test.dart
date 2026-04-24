@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:fitness_app/app/features/auth/domain/entities/login_entity.dart';
-import 'package:fitness_app/app/features/auth/domain/repository/auth_repository.dart';
-import 'package:fitness_app/app/features/auth/domain/use_cases/login_use_case.dart';
+import 'package:fitness_app/features/auth/domain/entities/login_entity.dart';
+import 'package:fitness_app/features/auth/domain/repository/auth_repository.dart';
+import 'package:fitness_app/features/auth/domain/use_cases/login_use_case.dart';
 
 import 'login_use_case_test.mocks.dart';
 
