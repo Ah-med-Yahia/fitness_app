@@ -7,9 +7,11 @@ class RowButtons extends StatelessWidget {
     super.key,
     required this.onPressedBack,
     required this.onPressedNext,
+    required this.nextText,
   });
   final VoidCallback onPressedBack;
   final VoidCallback onPressedNext;
+  final String nextText;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +26,7 @@ class RowButtons extends StatelessWidget {
           ),
           child: Text(AppTextConstants.back),
         ),
-        ElevatedButton(
-          onPressed: onPressedNext,
-          child: Text(AppTextConstants.next),
-        ),
+        ElevatedButton(onPressed: onPressedNext, child: Text(nextText)),
       ],
     );
   }

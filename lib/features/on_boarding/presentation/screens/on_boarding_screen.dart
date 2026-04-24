@@ -1,6 +1,7 @@
 import 'package:fitness_app/config/di/di.dart';
 import 'package:fitness_app/core/constants/app_text_constants.dart';
 import 'package:fitness_app/core/gen/assets.gen.dart';
+import 'package:fitness_app/core/routing/app_routes_constant.dart';
 import 'package:fitness_app/features/on_boarding/presentation/cubits/on_boarding_states.dart';
 import 'package:fitness_app/features/on_boarding/presentation/cubits/onboarding_cubit.dart';
 import 'package:fitness_app/features/on_boarding/presentation/cubits/onboarding_intents.dart';
@@ -9,6 +10,7 @@ import 'package:fitness_app/features/on_boarding/presentation/screens/on_boardin
 import 'package:fitness_app/features/on_boarding/presentation/screens/on_boarding_page_view3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -29,9 +31,24 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     onBoardingCubit = getIt<OnBoardingCubit>();
   }
 
+  void _onDotTap(int page) {
+    _pageController.animateToPage(
+      page,
+      duration: const Duration(milliseconds: 600),
+      curve: Curves.easeInOut,
+    );
+  }
+
   void _nextPage() {
     _pageController.nextPage(
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 600),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void _previousPage() {
+    _pageController.previousPage(
+      duration: const Duration(milliseconds: 600),
       curve: Curves.easeInOut,
     );
   }
@@ -51,13 +68,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             ),
           ),
           child: SafeArea(
-            child: Column(
-              children: [
-                BlocBuilder<OnBoardingCubit, OnBoardingStates>(
-                  buildWhen: (previous, current) =>
-                      previous.currentPage != current.currentPage,
-                  builder: (context, state) {
-                    return Visibility(
+            child: BlocBuilder<OnBoardingCubit, OnBoardingStates>(
+              buildWhen: (previous, current) =>
+                  previous.currentPage != current.currentPage,
+              builder: (context, state) {
+                return Column(
+                  children: [
+                    Visibility(
                       visible: state.currentPage != 2,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -66,7 +83,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             padding: const EdgeInsets.only(right: 16, top: 16),
                             child: InkWell(
                               onTap: () {
-                                _nextPage();
+                                context.pushReplacementNamed(
+                                  AppRoutesConstants.forgetPasswordRoute,
+                                );
                               },
                               child: Text(
                                 AppTextConstants.skip,
@@ -78,23 +97,41 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           ),
                         ],
                       ),
-                    );
-                  },
-                ),
-                Expanded(
-                  child: PageView(
-                    controller: _pageController,
-                    onPageChanged: (page) {
-                      onBoardingCubit.doIntent(UpdateCurrentPageIntent(page));
-                    },
-                    children: const [
-                      OnBoardingPageView1(),
-                      OnBoardingPageView2(),
-                      OnBoardingPageView3(),
-                    ],
-                  ),
-                ),
-              ],
+                    ),
+                    Expanded(
+                      child: PageView(
+                        controller: _pageController,
+                        physics: const BouncingScrollPhysics(),
+                        onPageChanged: (page) {
+                          onBoardingCubit.doIntent(
+                            UpdateCurrentPageIntent(page),
+                          );
+                        },
+                        children: [
+                          OnBoardingPageView1(
+                            onPressed: _nextPage,
+                            onDotTap: _onDotTap,
+                          ),
+                          OnBoardingPageView2(
+                            onPressedBack: _previousPage,
+                            onPressedNext: _nextPage,
+                            onDotTap: _onDotTap,
+                          ),
+                          OnBoardingPageView3(
+                            onPressedBack: _previousPage,
+                            onPressedNext: () {
+                              context.pushReplacementNamed(
+                                AppRoutesConstants.forgetPasswordRoute,
+                              );
+                            },
+                            onDotTap: _onDotTap,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ),

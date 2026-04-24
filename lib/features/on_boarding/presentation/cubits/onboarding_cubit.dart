@@ -10,10 +10,14 @@ class OnBoardingCubit extends Cubit<OnBoardingStates> {
     switch (intent) {
       case UpdateCurrentPageIntent(page: final page):
         _updateCurrentPage(page);
+      case NavigateToRegisterIntent():
+        _navigateToRegister();
     }
   }
 
   void _updateCurrentPage(int page) {
     emit(state.copyWith(currentPage: page));
   }
+
+  void _navigateToRegister() {}
 }

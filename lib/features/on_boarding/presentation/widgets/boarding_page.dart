@@ -5,12 +5,14 @@ class BoardingPage extends StatelessWidget {
   final String image;
   final String title;
   final String description;
+  final void Function(int)? onDotTap;
   final Widget button;
   const BoardingPage({
     super.key,
     required this.image,
     required this.title,
     required this.description,
+    required this.onDotTap,
     required this.button,
   });
 
@@ -24,13 +26,18 @@ class BoardingPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(
-              height: screenSize.height * 0.6,
+              height: screenSize.height * 0.66,
               width: double.infinity,
               child: Image.asset(image, fit: BoxFit.cover),
             ),
           ],
         ),
-        Footer(title: title, description: description, buttton: button),
+        Footer(
+          title: title,
+          onDotTap: onDotTap,
+          description: description,
+          buttton: button,
+        ),
       ],
     );
   }

@@ -22,6 +22,7 @@ class AppTextConstants {
   static String get page2Description => 'onBoarding.page2Description'.tr();
   static String get page3Title => 'onBoarding.page3Title'.tr();
   static String get page3Description => 'onBoarding.page3Description'.tr();
+  static String get doIt => 'onBoarding.doIt'.tr();
 
   // Auth
   static String get email => 'auth.email'.tr();
