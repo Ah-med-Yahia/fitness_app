@@ -72,7 +72,7 @@ class LoginForm extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: GestureDetector(
-              onTap: () => context.push(AppRoutesConstants.forgotPasswordRoute),
+              onTap: () => context.push(AppRoutesConstants.forgetPasswordRoute),
               child: Text(
                 AuthTextConstants.forgotPassword,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(

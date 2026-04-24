@@ -27,6 +27,13 @@ abstract class AppRouter {
           child: const LoginScreen(),
         ),
       ),
+      GoRoute(
+        path: AppRoutesConstants.foodCategoryRoute,
+        builder: (context, state) => BlocProvider(
+          create: (_) => getIt<LoginCubit>(),
+          child: const CategoriesScreen(),
+        ),
+      ),
     ],
   );
 }

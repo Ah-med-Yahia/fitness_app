@@ -85,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
       loading: UIUtils.showEasyLoading,
       success: (_) {
         UIUtils.hideEasyLoading();
-        context.go(AppRoutesConstants.homeRoute);
+        context.go(AppRoutesConstants.foodCategoryRoute);
       },
       failure: (message) {
         UIUtils.hideEasyLoading();

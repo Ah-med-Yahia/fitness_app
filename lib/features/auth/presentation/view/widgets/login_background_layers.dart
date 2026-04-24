@@ -4,6 +4,8 @@ import 'dart:ui';
 import 'package:fitness_app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../app/core/gen/assets.gen.dart';
+
 class LoginBackgroundLayers extends StatelessWidget {
   const LoginBackgroundLayers({super.key});
 

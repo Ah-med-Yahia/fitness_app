@@ -1,5 +1,7 @@
 import 'package:fitness_app/config/base_state/base_state.dart';
 
+import '../../../../../config/errors/app_exception.dart';
+
 class ForgetPasswordStates extends BaseState<void> {
   final String email;
   final bool isEmailValid;
@@ -50,6 +52,7 @@ class ForgetPasswordStates extends BaseState<void> {
     bool? isFormValid,
     bool? isObscurePassword,
     bool? isObscureConfirmPassword,
+    AppException? error,
   }) {
     return ForgetPasswordStates(
       isEmpty: isEmpty ?? this.isEmpty,
