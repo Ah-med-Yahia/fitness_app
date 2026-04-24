@@ -1,6 +1,6 @@
+import 'package:fitness_app/app/core/gen/assets.gen.dart';
 import 'package:fitness_app/config/di/di.dart';
 import 'package:fitness_app/core/constants/app_text_constants.dart';
-import 'package:fitness_app/core/gen/assets.gen.dart';
 import 'package:fitness_app/core/routing/app_routes_constant.dart';
 import 'package:fitness_app/core/theme/app_colors.dart';
 import 'package:fitness_app/core/utils/ui_utils.dart';

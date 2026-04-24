@@ -39,5 +39,12 @@
   "messages": {
     "otpSentSuccessfully": "تم إرسال رمز التحقق بنجاح",
     "passwordResetSuccessfully": "تمت إعادة تعيين كلمة المرور بنجاح"
-  }
+  },
+
+
+  "loading": "تحميل",
+  "retry": "اعد المحاولة",
+  "foodRecommendation": "اقتراحات الطعام",
+  "noCategoriesAvailable": "ليس هناك تصنيفات متاحة",
+  "ingredients": "المكونات"
 }

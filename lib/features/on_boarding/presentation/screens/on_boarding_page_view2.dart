@@ -1,5 +1,5 @@
+import 'package:fitness_app/app/core/gen/assets.gen.dart';
 import 'package:fitness_app/core/constants/app_text_constants.dart';
-import 'package:fitness_app/core/gen/assets.gen.dart';
 import 'package:fitness_app/features/on_boarding/presentation/widgets/boarding_page.dart';
 import 'package:fitness_app/features/on_boarding/presentation/widgets/row_buttons.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:fitness_app/config/errors/app_exception.dart';
 import 'package:fitness_app/core/constants/errors_constants.dart';
 
-class ApiException extends AppException {
+class ApiException extends AppException with EquatableMixin {
   ApiException(super.message, {super.code});
 
   factory ApiException.fromResponse({
@@ -13,4 +14,7 @@ class ApiException extends AppException {
       code: statusCode,
     );
   }
+
+  @override
+  List<Object?> get props => [];
 }

@@ -39,5 +39,10 @@
   "messages": {
     "otpSentSuccessfully": "OTP sent successfully",
     "passwordResetSuccessfully": "Password reset successfully"
-  }
+  },
+  "loading": "loading",
+  "retry": "retry",
+  "foodRecommendation": "Food Recommendation",
+  "noCategoriesAvailable": "No Categories Available",
+  "ingredients": "Ingredients"
 }
