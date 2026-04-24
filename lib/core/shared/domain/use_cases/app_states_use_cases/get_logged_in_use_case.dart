@@ -1,0 +1,12 @@
+import 'package:fitness_app/config/base_response/base_response.dart';
+import 'package:fitness_app/core/shared/domain/repositories/app_states_repository/app_states_repository.dart';
+import 'package:injectable/injectable.dart';
+
+@injectable
+class GetLoggedInUseCase {
+  final AppStatesRepository _appStatesRepository;
+  GetLoggedInUseCase(this._appStatesRepository);
+  Future<BaseResponse<bool?>> call() {
+    return _appStatesRepository.getIsLoggedIn();
+  }
+}

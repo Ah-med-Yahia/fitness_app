@@ -2,9 +2,12 @@ import 'package:fitness_app/config/di/di.dart';
 import 'package:fitness_app/core/constants/app_text_constants.dart';
 import 'package:fitness_app/core/gen/assets.gen.dart';
 import 'package:fitness_app/core/routing/app_routes_constant.dart';
+import 'package:fitness_app/core/theme/app_colors.dart';
+import 'package:fitness_app/core/utils/ui_utils.dart';
 import 'package:fitness_app/features/on_boarding/presentation/cubits/on_boarding_states.dart';
 import 'package:fitness_app/features/on_boarding/presentation/cubits/onboarding_cubit.dart';
 import 'package:fitness_app/features/on_boarding/presentation/cubits/onboarding_intents.dart';
+import 'package:fitness_app/features/on_boarding/presentation/cubits/onboarding_side_effects.dart';
 import 'package:fitness_app/features/on_boarding/presentation/screens/on_boarding_page_view1.dart';
 import 'package:fitness_app/features/on_boarding/presentation/screens/on_boarding_page_view2.dart';
 import 'package:fitness_app/features/on_boarding/presentation/screens/on_boarding_page_view3.dart';
@@ -25,10 +28,25 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final PageController _pageController = PageController();
 
   @override
+  void initState() {
+    onBoardingCubit = getIt<OnBoardingCubit>();
+    onBoardingCubit.sideEffects.listen((event) {
+      switch (event) {
+        case ShowErrorSideEffect(message: final message):
+          UIUtils.showMessage(
+            message,
+            backGroundColor: AppColors.red,
+            textColor: AppColors.white,
+          );
+      }
+    });
+    super.initState();
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     textTheme = Theme.of(context).textTheme;
-    onBoardingCubit = getIt<OnBoardingCubit>();
   }
 
   void _onDotTap(int page) {
