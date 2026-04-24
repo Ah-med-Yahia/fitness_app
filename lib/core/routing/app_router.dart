@@ -7,6 +7,7 @@ import 'package:fitness_app/features/auth/forget_password/presentation/screens/f
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../feature/food/presentation/view/meal_details_screen.dart';
 import '../../features/auth/presentation/view/screens/login_screen.dart';
 
 import '../../feature/food_category/presentation/view/categories_screen.dart';
@@ -34,6 +35,7 @@ abstract class AppRouter {
           child: const CategoriesScreen(),
         ),
       ),
+
     ],
   );
 }

@@ -11,11 +11,11 @@ import '../../data/models/meal/meals_response.dart';
 
 
 part 'api_client.g.dart';
-@injectable
+
 @RestApi()
 abstract class FoodDetailsApiClient {
-  @factoryMethod
-  factory FoodDetailsApiClient(Dio dio) = _FoodDetailsApiClient;
+
+  factory FoodDetailsApiClient(Dio dio, {String baseUrl}) = _FoodDetailsApiClient;
   @GET(ApiConstants.meals)
   Future<MealsResponse> getMeals(
       @Queries() DynamicQueries  query);
