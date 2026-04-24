@@ -16,6 +16,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
 
   runApp(
+    //const FitnessApp(),
     EasyLocalization(
       supportedLocales: const [
         Locale(AppTextConstants.enLangKey),
@@ -27,6 +28,7 @@ void main() async {
       useOnlyLangCode: true,
       saveLocale: false,
       child: const FitnessApp(),
+
     ),
   );
 }
