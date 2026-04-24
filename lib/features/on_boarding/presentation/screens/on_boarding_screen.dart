@@ -108,7 +108,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             child: InkWell(
                               onTap: () {
                                 context.pushReplacementNamed(
-                                  AppRoutesConstants.forgetPasswordRoute,
+                                  AppRoutesConstants.signInRoute,
                                 );
                               },
                               child: Text(
