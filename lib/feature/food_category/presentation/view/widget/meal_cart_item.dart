@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fitness_app/core/routing/app_routes_constant.dart';
 import 'package:fitness_app/feature/food/domain/models/meals_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../../core/theme/app_colors.dart';
 class MealCartItem extends StatefulWidget {
   const MealCartItem({super.key, required this.meal});
@@ -15,7 +16,13 @@ class _MealCartItemState extends State<MealCartItem> {
   Widget build(BuildContext context) {
     return  InkWell(
       onTap: () {
-        Navigator.pushNamed(context,AppRoutesConstants.foodDetailsRoute,arguments:widget.meal?.idMeal);
+        context.pushNamed(
+          AppRoutesConstants.foodDetailsRoute,
+          pathParameters: {
+            'id':widget.meal?.idMeal??''
+          },
+        );
+        //Navigator.pushNamed(context,AppRoutesConstants.foodDetailsRoute,arguments:widget.meal?.idMeal);
       },
       child:
       ClipRRect(

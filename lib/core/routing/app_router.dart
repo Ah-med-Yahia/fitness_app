@@ -30,10 +30,19 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: AppRoutesConstants.foodCategoryRoute,
-        builder: (context, state) => BlocProvider(
-          create: (_) => getIt<LoginCubit>(),
-          child: const CategoriesScreen(),
-        ),
+        builder: (context, state) {
+          return const CategoriesScreen();
+        },
+      ),
+      GoRoute(
+        path: '${AppRoutesConstants.foodDetailsRoute}/:id',
+        name: AppRoutesConstants.foodDetailsRoute,
+        builder: (context, state) {
+          final mealId = state.pathParameters['id'];
+          return MealDetailsScreen(
+            mealId: mealId??'',
+          );
+        },
       ),
 
     ],

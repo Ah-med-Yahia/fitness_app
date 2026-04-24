@@ -110,7 +110,7 @@ class _MealDetailsWidgetState extends State<MealDetailsWidget> {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: AppColors.black,
+              color: AppColors.transparent,
               borderRadius: BorderRadius.circular(24),
             ),
             child: Column(
@@ -189,7 +189,7 @@ class _MealDetailsWidgetState extends State<MealDetailsWidget> {
             ],
           ),
           const Divider(
-            color:Colors.grey,
+            color:Colors.black26,
             thickness:.35,
 
           ),
