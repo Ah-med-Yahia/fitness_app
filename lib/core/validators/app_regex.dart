@@ -38,3 +38,4 @@ abstract class AppRegex {
     return otpCode.length == 6 && int.tryParse(otpCode) != null;
   }
 }
+

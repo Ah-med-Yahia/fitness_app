@@ -62,7 +62,7 @@ flutter:
   - assets/translations/
 
 flutter_gen:
-  output: lib/core/gen/
+  output: lib/app/core/gen/
   integrations:
     lottie: true
     flutter_svg: true
