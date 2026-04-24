@@ -36,43 +36,53 @@ class CategoriesBodyWidget extends StatelessWidget {
                   : state.categoriesState.data != null
                   ? state.categoriesState.data!.categoriesEntity!.isNotEmpty
                         ? DefaultTabController(
-                      initialIndex: state.categoriesState.index,
-                      length: state
+                            initialIndex: state.categoriesState.index,
+                            length: state
                                 .categoriesState
                                 .data!
                                 .categoriesEntity!
                                 .length,
                             child: TabBar(
-                        onTap: (value) {
-                          categoriesViewModel.doIntent(
-                            GetCategoryIntent(
-                               DynamicQueries(queriesData: [
-                                 QueryData(key: 'c',
-                                     value: '${state.categoriesState.data?.categoriesEntity?[
-                                   state.categoriesState.index
-                                 ].title}')
-                               ]),
-                                index: value),
-                          );
-                        },
-                        padding: EdgeInsets.zero,
-                        isScrollable: true,
-                        tabAlignment: TabAlignment.start,
-                        indicatorColor: AppColors.transparent,
-                        dividerColor: Colors.transparent,
-                        labelPadding: EdgeInsets.zero,
-                        tabs: state.categoriesState.data!.categoriesEntity!
-                            .map(
-                              (e) => CategoriesItemWidget(
-                                itemName: e.title ?? '',
-                                isSelected:
-                                    state.categoriesState.index ==
-                                    state.categoriesState.data!.categoriesEntity!
-                                        .indexOf(e),
-                              ),
-                            )
-                            .toList(),
-                      ),
+                              onTap: (value) {
+                                categoriesViewModel.doIntent(
+                                  GetCategoryIntent(
+                                    DynamicQueries(
+                                      queriesData: [
+                                        QueryData(
+                                          key: 'c',
+                                          value:
+                                              '${state.categoriesState.data?.categoriesEntity?[state.categoriesState.index].title}',
+                                        ),
+                                      ],
+                                    ),
+                                    index: value,
+                                  ),
+                                );
+                              },
+                              padding: EdgeInsets.zero,
+                              isScrollable: true,
+                              tabAlignment: TabAlignment.start,
+                              indicatorColor: AppColors.transparent,
+                              dividerColor: Colors.transparent,
+                              labelPadding: EdgeInsets.zero,
+                              tabs: state
+                                  .categoriesState
+                                  .data!
+                                  .categoriesEntity!
+                                  .map(
+                                    (e) => CategoriesItemWidget(
+                                      itemName: e.title ?? '',
+                                      isSelected:
+                                          state.categoriesState.index ==
+                                          state
+                                              .categoriesState
+                                              .data!
+                                              .categoriesEntity!
+                                              .indexOf(e),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
                           )
                         : Container(
                             alignment: Alignment.centerLeft,
@@ -84,15 +94,21 @@ class CategoriesBodyWidget extends StatelessWidget {
                           )
                   : state.categoriesState.error != null
                   ? CustomErrorWidget(
-                      errorMessage: state.categoriesState.error?.message??'',
+                      errorMessage: state.categoriesState.error?.message ?? '',
                       onRetry: () {
-                        categoriesViewModel.doIntent(CategoriesAction(
-                            DynamicQueries(queriesData: [
-                              QueryData(key: 'c',value: '${state.categoriesState.data?.categoriesEntity?[
-                                state.categoriesState.index
-                              ].title}')
-                            ])
-                        ));
+                        categoriesViewModel.doIntent(
+                          CategoriesAction(
+                            DynamicQueries(
+                              queriesData: [
+                                QueryData(
+                                  key: 'c',
+                                  value:
+                                      '${state.categoriesState.data?.categoriesEntity?[state.categoriesState.index].title}',
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
                       },
                     )
                   : Container(),
@@ -108,18 +124,14 @@ class CategoriesBodyWidget extends StatelessWidget {
                           )
                         : Expanded(
                             child: GridView.builder(
-                              itemCount: state
-                                  .mealsCategoryState
-                                  .data
-                                  ?.meals
-                                  ?.length,
+                              itemCount:
+                                  state.mealsCategoryState.data?.meals?.length,
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                     mainAxisSpacing: 14,
                                     crossAxisSpacing: 14,
                                     childAspectRatio: 0.82,
                                     crossAxisCount: 2,
-
                                   ),
                               itemBuilder: (context, index) {
                                 return MealCartItem(
@@ -134,14 +146,20 @@ class CategoriesBodyWidget extends StatelessWidget {
                   : state.mealsCategoryState.error != null
                   ? CustomErrorWidget(
                       errorMessage:
-                      state.mealsCategoryState.error?.message??'',
+                          state.mealsCategoryState.error?.message ?? '',
 
                       onRetry: () {
                         categoriesViewModel.doIntent(
                           GetProductsCategoryIntent(
-                            DynamicQueries(queriesData: [
-                              QueryData(key: 'c',value: '${state.categoriesState.data?.categoriesEntity?[state.categoriesState.index].id}')
-                            ])
+                            DynamicQueries(
+                              queriesData: [
+                                QueryData(
+                                  key: 'c',
+                                  value:
+                                      '${state.categoriesState.data?.categoriesEntity?[state.categoriesState.index].id}',
+                                ),
+                              ],
+                            ),
                             // categoryId:
                             //     state
                             //         .categoriesState

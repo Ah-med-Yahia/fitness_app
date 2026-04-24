@@ -5,64 +5,61 @@ import 'package:flutter/material.dart';
 import '../../../../../core/theme/app_colors.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-
 class MealDetailsWidget extends StatefulWidget {
-  const MealDetailsWidget({super.key,required this.meal,
-  });
-final MealDetailsResponse meal;
-//final MealState mealState;
+  const MealDetailsWidget({super.key, required this.meal});
+  final MealDetailsResponse meal;
+  //final MealState mealState;
 
   @override
   State<MealDetailsWidget> createState() => _MealDetailsWidgetState();
 }
 
 class _MealDetailsWidgetState extends State<MealDetailsWidget> {
- late final YoutubePlayerController _controller;
-@override
+  late final YoutubePlayerController _controller;
+  @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    final String videoId = YoutubePlayerController.convertUrlToId(
-      widget.meal.meals?[0].strYoutube??'',
-    )??'';
-    _controller= YoutubePlayerController.fromVideoId(
- videoId:videoId, // The ID from the YouTube URL
- autoPlay: false,
- params: const YoutubePlayerParams(
- showControls: true,
- showFullscreenButton: true,
-   origin: 'https://www.youtube-nocookie.com',
- ),
- );
-   // _controller = YoutubePlayerController
+    final String videoId =
+        YoutubePlayerController.convertUrlToId(
+          widget.meal.meals?[0].strYoutube ?? '',
+        ) ??
+        '';
+    _controller = YoutubePlayerController.fromVideoId(
+      videoId: videoId, // The ID from the YouTube URL
+      autoPlay: false,
+      params: const YoutubePlayerParams(
+        showControls: true,
+        showFullscreenButton: true,
+        origin: 'https://www.youtube-nocookie.com',
+      ),
+    );
+    // _controller = YoutubePlayerController
   }
+
   @override
   Widget build(BuildContext context) {
-    return  Padding(
+    return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Center(
             // 2. Wrap the player in a YoutubePlayer widget
-            child: YoutubePlayer(
-              controller: _controller,
-              aspectRatio: 16 / 9,
-            ),
+            child: YoutubePlayer(controller: _controller, aspectRatio: 16 / 9),
           ),
           const SizedBox(height: 24),
           Stack(
             alignment: AlignmentGeometry.bottomCenter,
             children: [
               Container(
-                height:500,
+                height: 500,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                 // color: const Color(0xFFE8ECF0),
-                //  borderRadius: BorderRadius.circular(24),
+                  // color: const Color(0xFFE8ECF0),
+                  //  borderRadius: BorderRadius.circular(24),
                   image: DecorationImage(
                     image: NetworkImage(
-                      widget.meal.meals?[0].strMealThumb??'',
+                      widget.meal.meals?[0].strMealThumb ?? '',
                     ),
                     fit: BoxFit.cover,
                   ),
@@ -75,7 +72,7 @@ class _MealDetailsWidgetState extends State<MealDetailsWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.meal.meals?[0].strMeal??'',
+                      widget.meal.meals?[0].strMeal ?? '',
                       style: const TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.w700,
@@ -86,7 +83,7 @@ class _MealDetailsWidgetState extends State<MealDetailsWidget> {
                     const SizedBox(height: 12),
                     // Description
                     Text(
-                      widget.meal.meals?[0].strInstructions??'',
+                      widget.meal.meals?[0].strInstructions ?? '',
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
@@ -101,9 +98,7 @@ class _MealDetailsWidgetState extends State<MealDetailsWidget> {
           ),
           const SizedBox(height: 24),
           // Ingredients Title
-           Text(
-            'Ingredients'.tr(),
-           ),
+          Text('Ingredients'.tr()),
           const SizedBox(height: 16),
 
           // Ingredients List
@@ -114,21 +109,20 @@ class _MealDetailsWidgetState extends State<MealDetailsWidget> {
               borderRadius: BorderRadius.circular(24),
             ),
             child: Column(
-              children:
-                  fillIngredientsList().map(
-                    (e) {
-                      return _buildIngredientRow(e.strIngredient??'', e.strQuantity??'');
-                    },
-                  ).toList()
+              children: fillIngredientsList().map((e) {
+                return _buildIngredientRow(
+                  e.strIngredient ?? '',
+                  e.strQuantity ?? '',
+                );
+              }).toList(),
             ),
           ),
-
         ],
       ),
     );
   }
 
-  Widget _buildNutritionCard(String value, String label, String unit) {
+  Widget buildNutritionCard(String value, String label, String unit) {
     return Column(
       children: [
         RichText(
@@ -175,48 +169,43 @@ class _MealDetailsWidgetState extends State<MealDetailsWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                name,
-              ),
+              Text(name),
               Text(
                 quantity,
                 style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
-                  color:AppColors.primary,
+                  color: AppColors.primary,
                 ),
               ),
             ],
           ),
-          const Divider(
-            color:Colors.black26,
-            thickness:.35,
-
-          ),
+          const Divider(color: Colors.black26, thickness: .35),
         ],
       ),
     );
   }
-  List<IngredientsMeal> fillIngredientsList(){
+
+  List<IngredientsMeal> fillIngredientsList() {
     final List<IngredientsMeal> ingredientsList = [];
     for (int i = 1; i <= 20; i++) {
       final String ingredientName = 'strIngredient$i';
       final String ingredientQuantity = 'strMeasure$i';
       final String? ingredient = widget.meal.meals?[0].toJson()[ingredientName];
-      final String? quantity = widget.meal.meals?[0].toJson()[ingredientQuantity];
+      final String? quantity = widget.meal.meals?[0]
+          .toJson()[ingredientQuantity];
       if (ingredient != null && ingredient.isNotEmpty) {
-        ingredientsList.add(IngredientsMeal(
-          strIngredient: ingredient,
-          strQuantity: quantity,
-        ));
+        ingredientsList.add(
+          IngredientsMeal(strIngredient: ingredient, strQuantity: quantity),
+        );
       }
     }
-  return ingredientsList;
+    return ingredientsList;
   }
 }
-class IngredientsMeal
-{
+
+class IngredientsMeal {
   String? strIngredient;
   String? strQuantity;
-  IngredientsMeal({this.strIngredient,this.strQuantity});
+  IngredientsMeal({this.strIngredient, this.strQuantity});
 }
