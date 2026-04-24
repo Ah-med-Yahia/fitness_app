@@ -1,4 +1,3 @@
-
 import 'package:fitness_app/config/cache_services/serializer/serializer.dart';
 
 class BoolSerializer implements Serializer<bool> {

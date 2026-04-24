@@ -30,4 +30,11 @@ abstract class AppRegex {
 
     return internationalRegex.hasMatch(trimmed);
   }
+
+  static bool isOtpCodeValid(String otpCode) {
+    if (otpCode.isEmpty) {
+      return false;
+    }
+    return otpCode.length == 6 && int.tryParse(otpCode) != null;
+  }
 }

@@ -1,0 +1,50 @@
+{
+  "common": {
+    "loading": "جارٍ التحميل...",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "done": "تم",
+    "next": "التالي",
+    "back": "السابق"
+  },
+  "onBoarding": {
+    "skip": "تخطي",
+    "page1Title": "ثمن التميز هو الانضباط",
+    "page1Description": "لا يأتي التميز من الموهبة وحدها، بل يأتي من الانضباط والمثابرة والاختيار اليومي للاستمرار.",
+    "page2Title": "لم تكن اللياقة البدنية ممتعة إلى هذا الحد من قبل",
+    "page2Description": "غيّر مسارك نحو اللياقة البدنية مع منصتنا التفاعلية والممتعة. تتبّع تقدّمك، وحافظ على حماسك، وحقّق أهدافك كما لم تفعل من قبل.",
+    "page3Title": "لا مزيد من الأعذار",
+    "page3Description": "لا تنتظر اللحظة المثالية. ابدأ الآن، استمر بثبات، وشاهد نفسك تتغير.",
+    "doIt": "افعلها"
+  },
+  "auth": {
+    "email": "البريد الإلكتروني",
+    "forgetPassword": "نسيت كلمة المرور",
+    "enterYourEmail": "أدخل بريدك الإلكتروني",
+    "sendOtp": "إرسال رمز التحقق",
+    "otpCode": "رمز التحقق",
+    "enterYourOtpCheckYourEmail": "أدخل رمز التحقق - تحقق من بريدك الإلكتروني",
+    "didntRecieveVerificationCode": "لم تستلم رمز التحقق؟",
+    "resendCode": "إعادة إرسال الرمز",
+    "makeSureIts8CharactersOrMore": "تأكد من أنها 8 أحرف أو أكثر",
+    "createNewPassword": "إنشاء كلمة مرور جديدة",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور"
+  },
+  "validation": {
+    "pleaseEnterValidEmail": "يرجى إدخال بريد إلكتروني صحيح",
+    "pleaseEnterValidOtp": "يرجى إدخال رمز تحقق صحيح",
+    "pleaseEnterValidPassword": "يرجى إدخال كلمة مرور صحيحة"
+  },
+  "messages": {
+    "otpSentSuccessfully": "تم إرسال رمز التحقق بنجاح",
+    "passwordResetSuccessfully": "تمت إعادة تعيين كلمة المرور بنجاح"
+  },
+
+
+  "loading": "تحميل",
+  "retry": "اعد المحاولة",
+  "foodRecommendation": "اقتراحات الطعام",
+  "noCategoriesAvailable": "ليس هناك تصنيفات متاحة",
+  "ingredients": "المكونات"
+}

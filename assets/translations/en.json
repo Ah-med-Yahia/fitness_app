@@ -1,0 +1,48 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "done": "Done",
+    "next": "Next",
+    "back": "Back"
+  },
+  "onBoarding": {
+    "skip": "Skip",
+    "page1Title": "The Price of Excellence \nIs Discipline",
+    "page1Description": "Excellence doesn’t come from talent alone — it comes from discipline, consistency, and the daily choice to keep going.",
+    "page2Title": "Fitness Has Never Been So\nMuch Fun",
+    "page2Description": "Transform your fitness journey with our engaging and interactive platform. Track your progress, stay motivated, and achieve your goals like never before.",
+    "page3Title": "NO MORE EXCUSES\nDo It Now",
+    "page3Description": "Stop waiting for the perfect moment. Start now, stay consistent, and watch yourself transform.",
+    "doIt": "Do It"
+  },
+  "auth": {
+    "email": "Email",
+    "forgetPassword": "Forget Password",
+    "enterYourEmail": "Enter your email",
+    "sendOtp": "Send OTP",
+    "otpCode": "OTP Code",
+    "enterYourOtpCheckYourEmail": "Enter Your OTP - Check your email",
+    "didntRecieveVerificationCode": "Didn't receive verification code?",
+    "resendCode": "Resend Code",
+    "makeSureIts8CharactersOrMore": "Make sure it's 8 characters or more",
+    "createNewPassword": "Create New Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password"
+  },
+  "validation": {
+    "pleaseEnterValidEmail": "Please enter a valid email",
+    "pleaseEnterValidOtp": "Please enter a valid OTP",
+    "pleaseEnterValidPassword": "Please enter a valid password"
+  },
+  "messages": {
+    "otpSentSuccessfully": "OTP sent successfully",
+    "passwordResetSuccessfully": "Password reset successfully"
+  },
+  "loading": "loading",
+  "retry": "retry",
+  "foodRecommendation": "Food Recommendation",
+  "noCategoriesAvailable": "No Categories Available",
+  "ingredients": "Ingredients"
+}

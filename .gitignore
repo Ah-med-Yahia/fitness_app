@@ -62,3 +62,8 @@ android/app/release/
 app.*.symbols
 app.*.map.json
 app.*.symbols.json
+
+devtools_options.yaml
+pubspec.lock
+lib/core/gen/assets.gen.dart
+**/*.gen.dart
